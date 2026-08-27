@@ -1,0 +1,36 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = "Styllu's Assessoria Contábil | Você cuida do seu negócio. A gente cuida de tudo o mais.",
+  description = 'Assessoria contábil humanizada e consultiva. 35+ anos, 400+ clientes. Tributário, Trabalhista, Contábil e BPO Financeiro para decisões com clareza e segurança.',
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <meta
+      name="keywords"
+      content="assessoria contábil, contabilidade, tributário, trabalhista, BPO financeiro, planejamento tributário"
+    />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="pt_BR" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" href="/styllu-logo.png" />
+    <title>{title}</title>
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>

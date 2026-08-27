@@ -1,0 +1,383 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Footer from '../components/Footer.astro';
+import SiteHeader from '../components/react/SiteHeader';
+import IntentPicker from '../components/react/IntentPicker';
+import PlanQuiz from '../components/react/PlanQuiz';
+import ContactForm from '../components/react/ContactForm';
+import Testimonials from '../components/react/Testimonials';
+import HeroActions from '../components/react/HeroActions';
+
+const services = [
+  {
+    label: 'Assessoria Tributária',
+    title: 'Pague o que é devido — nem um real além disso.',
+    bullets: ['Redução legal da carga tributária', 'Revisões e oportunidades fiscais', 'Calendário fiscal sem surpresas'],
+    practice: 'Na prática: planejamento tributário, análise de NCM, apuração de impostos e obrigações com compliance total.',
+  },
+  {
+    label: 'Assessoria Trabalhista',
+    title: 'Sua equipe em dia, sem dor de cabeça com prazos e obrigações.',
+    bullets: ['eSocial sem pendências', 'Rotinas claras e prazos cumpridos', 'Orientação preventiva para o RH'],
+    practice: 'Na prática: folha, admissões, demissões e rotinas do DP com foco em segurança jurídica e agilidade.',
+  },
+  {
+    label: 'Assessoria Contábil',
+    title: 'Tenha números organizados para decidir com confiança.',
+    bullets: ['Demonstrativos e indicadores-chave', 'Centros de custo e orçamentos', 'Acompanhamento consultivo com analistas experientes'],
+    practice: 'Na prática: escrituração, balanços e relatórios gerenciais que viram decisões.',
+  },
+  {
+    label: 'BPO Financeiro',
+    title: 'Deixe a rotina financeira com a gente e volte a olhar para o negócio.',
+    bullets: ['Rotina financeira organizada', 'DRE gerencial e previsões', 'Painéis e relatórios de controle'],
+    practice: 'Na prática: contas a pagar e receber, conciliações e fluxo de caixa com inteligência e rotina.',
+  },
+];
+
+const differentials = [
+  { title: 'Assessoria Consultiva', text: 'Estratégia aplicada ao dia a dia, não só tarefas.' },
+  { title: 'Tecnologia e IA', text: 'Processos mais ágeis e insights melhores.' },
+  { title: 'Atendimento Humanizado', text: 'Proximidade real e comunicação clara.' },
+  { title: 'Relatórios Estratégicos', text: 'Informação que orienta decisões.' },
+  { title: 'Reputação', text: 'Excelência reconhecida pelos clientes.' },
+  { title: 'Atendimento Nacional', text: 'Mesma qualidade em diversos estados.' },
+];
+
+const plans = [
+  {
+    name: 'Bronze',
+    badge: 'Essencial',
+    featured: false,
+    description: 'A base sólida para começar sem dor de cabeça com o Fisco.',
+    items: ['Apuração de impostos', 'Obrigações fiscais', 'Suporte com analista dedicado'],
+  },
+  {
+    name: 'Prata',
+    badge: 'Mais contratado',
+    featured: false,
+    description: 'Sua equipe em dia, seus impostos em ordem — tranquilidade para crescer.',
+    items: ['Tributário do Bronze', 'Folha de pagamento', 'Admissões/Demissões', 'eSocial completo', 'Suporte com analista dedicado'],
+  },
+  {
+    name: 'Ouro',
+    badge: 'Mais Popular',
+    featured: true,
+    description: 'A visão completa do seu negócio para decidir com confiança todo mês.',
+    items: ['Tudo do Prata', 'Balanços e demonstrativos', 'Relatórios gerenciais', 'Acompanhamento consultivo', 'Fluxo de caixa estratégico'],
+  },
+  {
+    name: 'Premium',
+    badge: 'Estrutura mais completa',
+    featured: false,
+    description: 'Foco total no seu negócio — a Styllu\'s assume a operação financeira por você.',
+    items: ['Tudo do Ouro', 'Rotina financeira completa', 'Conciliações bancárias', 'Análise avançada', 'Consultoria estratégica'],
+  },
+];
+
+const team = [
+  {
+    initials: 'T',
+    name: 'Tatiana Escudero',
+    role: 'Diretora Operacional',
+    bio: 'À frente da Styllu\'s com visão estratégica e humanizada. Acredita que contabilidade boa se faz com a porta aberta.',
+  },
+  {
+    initials: 'EM',
+    name: 'Emerson Morelli',
+    role: 'Diretor e Gerente Tributário',
+    bio: 'Especialista em planejamento fiscal. Conhecido pelos clientes pelo retorno rápido e pela explicação simples.',
+  },
+  {
+    initials: 'FR',
+    name: 'Felipe Rinaldi',
+    role: 'Diretor Estratégico',
+    bio: 'Atendimento de proximidade. Acompanha cada cliente como se fosse o único — e os depoimentos provam.',
+  },
+];
+---
+
+<BaseLayout>
+  <SiteHeader client:load />
+
+  <main>
+    <section class="hero">
+      <div class="container hero__grid">
+        <div class="fade-up">
+          <div class="hero__badge">400+ clientes ativos • Atendimento nacional • Excelência reconhecida</div>
+          <h1>
+            Você cuida do seu negócio.
+            <span>A gente cuida de tudo o mais.</span>
+          </h1>
+          <p class="hero__tagline">Clareza para decidir. Segurança para crescer.</p>
+          <p class="hero__lead">
+            Contabilidade próxima e consultiva para quem está começando agora e para pequenas empresas que querem crescer com organização, clareza e segurança.
+          </p>
+          <HeroActions client:load />
+          <div class="hero__stats">
+            <div>
+              <div class="stat-number">35+</div>
+              <div class="stat-label">Anos de experiência</div>
+            </div>
+            <div>
+              <div class="stat-number">400+</div>
+              <div class="stat-label">Clientes ativos</div>
+            </div>
+            <div>
+              <div class="stat-number">5★</div>
+              <div class="stat-label">Reputação de excelência</div>
+            </div>
+          </div>
+        </div>
+        <div class="hero__visual fade-up-delay">
+          <div class="hero__logo-wrap">
+            <img src="/styllu-logo.png" alt="Styllu's Assessoria Contábil" width="320" height="320" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="comece">
+      <div class="container">
+        <p class="eyebrow">Comece por aqui</p>
+        <h2 class="section-title">O que trouxe você até a Styllu's?</h2>
+        <p class="section-lead" style="margin-bottom: 1.75rem;">
+          Escolha o que mais se parece com o seu momento. A conversa começa daí — sem formulário longo.
+        </p>
+        <IntentPicker client:visible />
+      </div>
+    </section>
+
+    <section class="section section-alt" id="como-ajudamos">
+      <div class="container">
+        <p class="eyebrow">Como ajudamos</p>
+        <h2 class="section-title">Como a Styllu's entra na sua história</h2>
+        <p class="section-lead" style="margin-bottom: 1.75rem;">
+          Três caminhos, o mesmo cuidado: entender antes de propor.
+        </p>
+        <div class="grid-3">
+          <article class="feature-tile">
+            <p class="service-label">Vou abrir minha empresa</p>
+            <h3>Comece certo, sem complicação</h3>
+            <p>Do CNPJ às primeiras obrigações, com orientação clara em cada etapa.</p>
+            <a class="btn btn-ghost" href="https://wa.me/5511910155687?text=Ol%C3%A1!%20Vou%20abrir%20minha%20empresa." target="_blank" rel="noopener noreferrer">Quero abrir com vocês →</a>
+          </article>
+          <article class="feature-tile">
+            <p class="service-label">Já tenho uma empresa</p>
+            <h3>Mais clareza e tranquilidade no mês inteiro</h3>
+            <ul>
+              <li>Diagnóstico do que está funcionando e do que precisa de atenção</li>
+              <li>Rotina fiscal, contábil e trabalhista organizada com prazos cumpridos</li>
+              <li>Relatórios que mostram o resultado do negócio, não só obrigações</li>
+              <li>Analista dedicado que conhece a sua empresa pelo nome</li>
+            </ul>
+            <a class="btn btn-ghost" href="#contato">Quero um diagnóstico da minha empresa →</a>
+          </article>
+          <article class="feature-tile">
+            <p class="service-label">Quero trocar de contador</p>
+            <h3>Trocar pode ser mais simples do que você imagina</h3>
+            <p>Cuidamos da transição com organização, para você não perder prazos nem dormir preocupado.</p>
+            <a class="btn btn-ghost" href="https://wa.me/5511910155687?text=Ol%C3%A1!%20Quero%20trocar%20de%20contador." target="_blank" rel="noopener noreferrer">Quero trocar com segurança →</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="servicos">
+      <div class="container">
+        <p class="eyebrow">Assessorias</p>
+        <h2 class="section-title">O que você ganha com as nossas assessorias</h2>
+        <p class="section-lead" style="margin-bottom: 1.75rem;">Você cuida do seu negócio. A gente cuida de tudo o mais.</p>
+        <div class="grid-2">
+          {services.map((service) => (
+            <article class="feature-tile">
+              <p class="service-label">{service.label}</p>
+              <h3>{service.title}</h3>
+              <ul>
+                {service.bullets.map((b) => <li>{b}</li>)}
+              </ul>
+              <p>{service.practice}</p>
+            </article>
+          ))}
+        </div>
+        <p style="margin-top:1.5rem; color:hsl(var(--muted-foreground)); text-align:center;">
+          Suporte consultivo sempre que precisar • Tempo médio de resposta: até 24h úteis
+        </p>
+      </div>
+    </section>
+
+    <section class="section section-alt" id="diferenciais">
+      <div class="container">
+        <p class="eyebrow">Por que a Styllu's</p>
+        <h2 class="section-title">Por que escolher a Styllu's?</h2>
+        <p class="section-lead" style="margin-bottom: 1.75rem;">Diferenciais que fazem a diferença no crescimento do seu negócio</p>
+        <div class="grid-3">
+          {differentials.map((item) => (
+            <article class="feature-tile">
+              <h3>{item.title}</h3>
+              <p>{item.text}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="planos">
+      <div class="container">
+        <p class="eyebrow">Planos</p>
+        <h2 class="section-title">Uma assessoria que acompanha o momento da sua empresa</h2>
+        <p class="section-lead" style="margin-bottom: 1.75rem;">
+          Do essencial à estrutura mais completa. Se não souber qual escolher, a gente descobre junto com você.
+        </p>
+        <div class="grid-4" style="margin-bottom: 2rem;">
+          {plans.map((plan) => (
+            <article class={`plan ${plan.featured ? 'plan--featured' : ''}`}>
+              <span class="plan__badge">{plan.badge}</span>
+              <p class="plan__price">Sob consulta</p>
+              <h3>{plan.name}</h3>
+              <p style="color:hsl(var(--muted-foreground)); font-size:0.92rem;">{plan.description}</p>
+              <ul>
+                {plan.items.map((item) => <li>{item}</li>)}
+              </ul>
+              <a
+                class="btn btn-primary"
+                href={`https://wa.me/5511910155687?text=${encodeURIComponent(`Olá! Quero solicitar proposta do plano ${plan.name}.`)}`}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Solicitar proposta
+              </a>
+            </article>
+          ))}
+        </div>
+
+        <div class="grid-2" style="align-items:start;">
+          <div>
+            <h3 style="font-family:var(--font-display); font-size:1.4rem; margin-bottom:0.5rem;">Não sabe qual plano faz sentido?</h3>
+            <p style="color:hsl(var(--muted-foreground)); margin-bottom:1rem;">
+              Responda algumas perguntas rápidas e a gente indica um caminho — sem custo e sem compromisso.
+            </p>
+            <p style="font-size:0.9rem; color:hsl(var(--muted-foreground));">
+              <strong>Importante:</strong> os serviços podem ser personalizados conforme a necessidade e o porte da sua empresa.
+            </p>
+          </div>
+          <PlanQuiz client:visible />
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-alt" id="depoimentos">
+      <div class="container">
+        <p class="eyebrow">Depoimentos</p>
+        <h2 class="section-title">O que nossos clientes dizem</h2>
+        <p class="section-lead" style="margin-bottom: 1.75rem;">
+          Histórias reais de transformação e crescimento com a Styllu's Assessoria Contábil.
+        </p>
+        <Testimonials client:visible />
+      </div>
+    </section>
+
+    <section class="section" id="equipe">
+      <div class="container">
+        <p class="eyebrow">Quem cuida do seu negócio</p>
+        <h2 class="section-title">Pessoas reais. Relações reais.</h2>
+        <p class="section-lead" style="margin-bottom: 1.75rem;">
+          Na Styllu's, cliente não fala com um número de protocolo — fala com gente que conhece o nome da empresa, o histórico e o momento dela.
+        </p>
+        <div class="grid-3">
+          {team.map((person) => (
+            <article class="team-card">
+              <div class="team-avatar">{person.initials}</div>
+              <h3>{person.name}</h3>
+              <p class="role">{person.role}</p>
+              <p>{person.bio}</p>
+            </article>
+          ))}
+        </div>
+        <p style="margin-top:1.5rem; color:hsl(var(--muted-foreground)); max-width:48rem;">
+          E ainda há um time inteiro de analistas, assistentes e gestores por trás de cada entrega — todos com o mesmo compromisso: cuidar do seu negócio como se fosse o nosso.
+        </p>
+      </div>
+    </section>
+
+    <section class="section section-alt" id="sobre">
+      <div class="container about-block">
+        <div>
+          <p class="eyebrow">Sobre</p>
+          <h2 class="section-title">Conheça a Styllu's Assessoria Contábil</h2>
+          <p style="color:hsl(var(--muted-foreground)); margin-bottom:1rem;">
+            São <strong>35 anos</strong> de história construída cliente a cliente, conversa por conversa. Começamos como um pequeno escritório de contabilidade em São Paulo e crescemos com uma convicção simples: o cliente não precisa entender de tributo — precisa de alguém de confiança para cuidar disso por ele.
+          </p>
+          <p style="color:hsl(var(--muted-foreground)); margin-bottom:1rem;">
+            Hoje somos um time de analistas, gestores e parceiros, diretores como a <strong>Tatiana</strong>, o <strong>Emerson</strong>, o <strong>Felipe Rinaldi</strong> e muitos outros líderes e colaboradores, que os clientes chamam pelo nome porque a relação é assim: próxima, atenta, presente no mês inteiro, não só no fechamento.
+          </p>
+          <p style="color:hsl(var(--muted-foreground)); margin-bottom:1.25rem;">
+            Cuidamos da parte chata para que o empreendedor possa cuidar do que ama. É isso que move a Styllu's desde o primeiro dia.
+          </p>
+          <blockquote style="font-family:var(--font-display); font-size:1.25rem; margin-bottom:1.25rem;">
+            “Você cuida do seu negócio. A gente cuida de tudo o mais.”
+          </blockquote>
+          <a class="btn btn-primary" href="#contato">Falar com a nossa equipe</a>
+        </div>
+        <div>
+          <div class="mission-grid">
+            <article class="mission-card">
+              <h3>Missão</h3>
+              <p style="color:hsl(var(--muted-foreground));">Ressignificar a contabilidade com uma assessoria humanizada, prática e personalizada.</p>
+            </article>
+            <article class="mission-card">
+              <h3>Visão</h3>
+              <p style="color:hsl(var(--muted-foreground));">Ser referência nacional em assessoria consultiva reconhecida pela excelência no atendimento.</p>
+            </article>
+          </div>
+          <div class="hero__stats" style="margin-top:1.5rem; border:none; padding:0;">
+            <div>
+              <div class="stat-number">35+</div>
+              <div class="stat-label">Anos de história</div>
+            </div>
+            <div>
+              <div class="stat-number">400+</div>
+              <div class="stat-label">Clientes ativos</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="contato">
+      <div class="container">
+        <p class="eyebrow">O próximo passo é seu</p>
+        <h2 class="section-title">Pronto para focar só no seu negócio?</h2>
+        <p class="section-lead" style="margin-bottom: 1.75rem;">
+          Conte o que sua empresa precisa. Em até 24h úteis a gente volta com um diagnóstico — sem custo, sem compromisso.
+        </p>
+        <div class="contact-grid">
+          <div class="contact-info">
+            <a class="btn btn-primary" href="https://wa.me/5511910155687?text=Ol%C3%A1!%20Quero%20fazer%20meu%20diagn%C3%B3stico%20gratuito." target="_blank" rel="noopener noreferrer">
+              Fazer meu diagnóstico gratuito
+            </a>
+            <div class="contact-item">
+              <h3>Endereço</h3>
+              <p>Rua da Bica, 55, Freguesia do Ó<br />São Paulo/SP, 02925-000</p>
+            </div>
+            <div class="contact-item">
+              <h3>WhatsApp</h3>
+              <p><a href="https://wa.me/5511910155687" target="_blank" rel="noopener noreferrer">(11) 91015-5687</a></p>
+            </div>
+            <div class="contact-item">
+              <h3>Telefone Comercial</h3>
+              <p><a href="tel:+551139333939">(11) 3933-3939</a></p>
+            </div>
+            <div class="contact-item">
+              <h3>E-mail</h3>
+              <p><a href="mailto:contato@stylluscontabil.com.br">contato@stylluscontabil.com.br</a></p>
+            </div>
+          </div>
+          <ContactForm client:visible />
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</BaseLayout>
