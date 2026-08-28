@@ -941,6 +941,80 @@ ul {
 .reviews-carousel {
   position: relative;
   padding-inline: 3rem;
+  min-height: 14rem;
+}
+
+.reviews-carousel.is-loading .reviews-carousel__viewport {
+  visibility: hidden;
+}
+
+.reviews-carousel.is-ready .reviews-carousel__viewport {
+  visibility: visible;
+  animation: reviewsFadeIn 0.35s ease;
+}
+
+@keyframes reviewsFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.reviews-carousel__loading {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  pointer-events: none;
+}
+
+.reviews-carousel__loading-dots {
+  display: inline-flex;
+  gap: 0.15rem;
+  font-family: var(--font-display);
+  font-size: 2rem;
+  font-weight: 700;
+  line-height: 1;
+  color: hsl(var(--primary));
+}
+
+.reviews-carousel__loading-dots span {
+  animation: reviewDotPulse 1.2s ease-in-out infinite;
+}
+
+.reviews-carousel__loading-dots span:nth-child(2) {
+  animation-delay: 0.15s;
+}
+
+.reviews-carousel__loading-dots span:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+@keyframes reviewDotPulse {
+  0%,
+  80%,
+  100% {
+    opacity: 0.2;
+    transform: translateY(0);
+  }
+  40% {
+    opacity: 1;
+    transform: translateY(-3px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reviews-carousel.is-ready .reviews-carousel__viewport {
+    animation: none;
+  }
+
+  .reviews-carousel__loading-dots span {
+    animation: none;
+    opacity: 0.6;
+  }
 }
 
 .reviews-carousel__viewport {
@@ -956,13 +1030,23 @@ ul {
   will-change: transform;
 }
 
+.reviews-carousel.is-ready .reviews-carousel__track {
+  transition: transform 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
 .reviews-carousel__slide {
   display: flex;
-  flex: 0 0 var(--slide-size, 100%);
-  width: var(--slide-size, 100%);
-  min-width: var(--slide-size, 100%);
+  flex: 0 0 calc(100% / var(--slides-per-view, 1));
+  width: calc(100% / var(--slides-per-view, 1));
+  min-width: calc(100% / var(--slides-per-view, 1));
   padding-inline: var(--space-xs);
   box-sizing: border-box;
+}
+
+.reviews-carousel.is-ready .reviews-carousel__slide {
+  flex: 0 0 var(--slide-size);
+  width: var(--slide-size);
+  min-width: var(--slide-size);
 }
 
 .reviews-carousel__nav {

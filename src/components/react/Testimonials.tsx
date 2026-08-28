@@ -51,6 +51,7 @@ export default function Testimonials() {
   const [slideSize, setSlideSize] = useState(0);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [touchStart, setTouchStart] = useState<number | null>(null);
+  const isReady = slideSize > 0;
 
   const maxIndex = Math.max(0, reviews.length - slidesPerView);
   const pageCount = maxIndex + 1;
@@ -98,11 +99,11 @@ export default function Testimonials() {
   const goNext = () => goTo(currentIndex + 1);
 
   const viewportStyle = {
-    '--slide-size': `${slideSize}px`,
+    ...(isReady ? { '--slide-size': `${slideSize}px` } : { '--slides-per-view': slidesPerView }),
   } as CSSProperties;
 
   const trackStyle = {
-    transform: slideSize > 0 ? `translateX(-${currentIndex * slideSize}px)` : undefined,
+    transform: isReady ? `translateX(-${currentIndex * slideSize}px)` : undefined,
   } as CSSProperties;
 
   function onTouchStart(event: TouchEvent) {
@@ -139,8 +140,8 @@ export default function Testimonials() {
         </a>
       </div>
 
-      <div className="reviews-carousel">
-        {pageCount > 1 && (
+      <div className={`reviews-carousel ${isReady ? 'is-ready' : 'is-loading'}`}>
+        {pageCount > 1 && isReady && (
           <button
             type="button"
             className="reviews-carousel__nav reviews-carousel__nav--prev"
@@ -151,12 +152,23 @@ export default function Testimonials() {
           </button>
         )}
 
+        {!isReady && (
+          <div className="reviews-carousel__loading" aria-label="Carregando depoimentos">
+            <span className="reviews-carousel__loading-dots" aria-hidden="true">
+              <span>.</span>
+              <span>.</span>
+              <span>.</span>
+            </span>
+          </div>
+        )}
+
         <div
           ref={viewportRef}
           className="reviews-carousel__viewport"
           style={viewportStyle}
-          onTouchStart={onTouchStart}
-          onTouchEnd={onTouchEnd}
+          aria-busy={!isReady}
+          onTouchStart={isReady ? onTouchStart : undefined}
+          onTouchEnd={isReady ? onTouchEnd : undefined}
         >
           <div className="reviews-carousel__track" style={trackStyle} aria-live="polite">
             {reviews.map((item) => (
@@ -170,7 +182,7 @@ export default function Testimonials() {
           </div>
         </div>
 
-        {pageCount > 1 && (
+        {pageCount > 1 && isReady && (
           <button
             type="button"
             className="reviews-carousel__nav reviews-carousel__nav--next"
@@ -181,7 +193,7 @@ export default function Testimonials() {
           </button>
         )}
 
-        {pageCount > 1 && (
+        {pageCount > 1 && isReady && (
           <div className="reviews-carousel__dots" role="tablist" aria-label="Depoimentos">
             {Array.from({ length: pageCount }, (_, index) => (
               <button
