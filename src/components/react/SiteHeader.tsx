@@ -27,7 +27,7 @@ export default function SiteHeader() {
             ))}
           </nav>
 
-          <a className="nav-pill__cta" href="/#contato">
+          <a className="nav-pill__cta shadow-animate" href="/#contato">
             Falar com especialista
           </a>
 
@@ -61,7 +61,7 @@ export default function SiteHeader() {
                 {link.label}
               </a>
             ))}
-            <a className="btn btn-primary" href="/#contato" onClick={() => setOpen(false)}>
+            <a className="btn btn-primary shadow-animate" href="/#contato" onClick={() => setOpen(false)}>
               Falar com especialista
             </a>
           </div>
