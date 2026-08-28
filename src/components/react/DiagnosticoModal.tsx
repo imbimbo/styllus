@@ -64,7 +64,7 @@ const STEPS = [
       { value: 'Folha e equipe', label: 'Cuidar da folha e da equipe' },
       { value: 'Relatórios', label: 'Ter relatórios para decidir' },
       { value: 'Financeiro', label: 'Organizar o financeiro' },
-      { value: 'Não sei ainda', label: 'Ainda não sei — quero orientação' },
+      { value: 'Não sei ainda', label: 'Ainda não sei, quero orientação' },
     ],
   },
   {
@@ -198,7 +198,7 @@ export default function DiagnosticoModal({
               <p>
                 Pelo que você contou, o plano <strong>{plan}</strong> pode fazer mais sentido.
               </p>
-              <span>É uma sugestão inicial — nossa equipe confirma com você antes de qualquer proposta.</span>
+              <span>É uma sugestão inicial. Nossa equipe confirma com você antes de qualquer proposta.</span>
             </div>
             <button type="button" className="btn btn-primary" style={{ width: '100%' }} onClick={openWhatsApp}>
               Abrir conversa no WhatsApp

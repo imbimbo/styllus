@@ -10,7 +10,7 @@ const intents = [
   {
     id: 'trocar',
     title: 'Quero trocar de contador',
-    description: 'A transição é mais simples do que parece — cuidamos dela por você.',
+    description: 'A transição é mais simples do que parece. Cuidamos dela por você.',
     message: 'Olá! Quero trocar de contador e entender como a Styllu\'s pode ajudar na transição.',
   },
   {
@@ -28,7 +28,7 @@ const intents = [
   {
     id: 'crescendo',
     title: 'Minha empresa está crescendo',
-    description: 'Mais equipe, mais números, mais decisões — com acompanhamento próximo.',
+    description: 'Mais equipe, mais números, mais decisões, com acompanhamento próximo.',
     message: 'Olá! Minha empresa está crescendo e preciso de assessoria mais completa.',
   },
   {
