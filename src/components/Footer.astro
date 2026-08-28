@@ -1,11 +1,12 @@
 ---
+import { withBase } from '../lib/base';
 ---
 
 <footer class="site-footer">
   <div class="container footer-grid">
     <div class="footer-brand">
-      <a class="brand" href="/" style="color:#fff">
-        <img src="/styllu-logo.png" alt="Styllu's" width="40" height="40" />
+      <a class="brand" href={withBase('')} style="color:#fff">
+        <img src={withBase('styllu-logo.png')} alt="Styllu's" width="40" height="40" />
       </a>
       <p>Muito mais do que contabilidade, uma verdadeira assessoria.</p>
       <div class="footer-meta">
@@ -18,21 +19,21 @@
     <div class="footer-col">
       <h4>Institucional</h4>
       <ul>
-        <li><a href="/#sobre">Sobre</a></li>
-        <li><a href="/#diferenciais">Diferenciais</a></li>
-        <li><a href="/#equipe">Equipe</a></li>
-        <li><a href="/#depoimentos">Depoimentos</a></li>
+        <li><a href={withBase('#sobre')}>Sobre</a></li>
+        <li><a href={withBase('#diferenciais')}>Diferenciais</a></li>
+        <li><a href={withBase('#equipe')}>Equipe</a></li>
+        <li><a href={withBase('#depoimentos')}>Depoimentos</a></li>
       </ul>
     </div>
 
     <div class="footer-col">
       <h4>Soluções</h4>
       <ul>
-        <li><a href="/#servicos">Tributário</a></li>
-        <li><a href="/#servicos">Trabalhista</a></li>
-        <li><a href="/#servicos">Contábil</a></li>
-        <li><a href="/#servicos">BPO Financeiro</a></li>
-        <li><a href="/#planos">Planos</a></li>
+        <li><a href={withBase('#servicos')}>Tributário</a></li>
+        <li><a href={withBase('#servicos')}>Trabalhista</a></li>
+        <li><a href={withBase('#servicos')}>Contábil</a></li>
+        <li><a href={withBase('#servicos')}>BPO Financeiro</a></li>
+        <li><a href={withBase('#planos')}>Planos</a></li>
       </ul>
     </div>
 
@@ -50,8 +51,8 @@
   <div class="container footer-bottom">
     <p>© {new Date().getFullYear()} Styllu's Assessoria Contábil. Todos os direitos reservados.</p>
     <div style="display:flex; gap:1rem;">
-      <a href="/politica-privacidade">Política de Privacidade</a>
-      <a href="/termos-uso">Termos de Uso</a>
+      <a href={withBase('politica-privacidade')}>Política de Privacidade</a>
+      <a href={withBase('termos-uso')}>Termos de Uso</a>
     </div>
   </div>
 </footer>

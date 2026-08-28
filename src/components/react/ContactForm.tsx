@@ -1,4 +1,5 @@
 import { useState, type FormEvent } from 'react';
+import { withBase } from '../../lib/base';
 
 type Fields = {
   name: string;
@@ -124,7 +125,7 @@ export default function ContactForm() {
         />
         <span>
           Autorizo o tratamento dos meus dados conforme a{' '}
-          <a href="/politica-privacidade" style={{ color: 'hsl(var(--primary))' }}>
+          <a href={withBase('politica-privacidade')} style={{ color: 'hsl(var(--primary))' }}>
             Política de Privacidade
           </a>
           . *

@@ -8,6 +8,7 @@ import ContactForm from '../components/react/ContactForm';
 import Testimonials from '../components/react/Testimonials';
 import HeroActions from '../components/react/HeroActions';
 import googleReviews from '../data/google-reviews.json';
+import { withBase } from '../lib/base';
 
 const googleRating = googleReviews.rating.toFixed(1);
 
@@ -134,7 +135,7 @@ const team = [
         </div>
         <div class="hero__visual fade-up-delay">
           <div class="hero__logo-wrap">
-            <img src="/styllu-logo.png" alt="Styllu's Assessoria Contábil" width="320" height="320" />
+            <img src={withBase('styllu-logo.png')} alt="Styllu's Assessoria Contábil" width="320" height="320" />
           </div>
         </div>
       </div>

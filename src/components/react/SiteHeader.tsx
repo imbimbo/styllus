@@ -1,11 +1,12 @@
 import { useState } from 'react';
+import { withBase } from '../../lib/base';
 
 const links = [
-  { href: '/#como-ajudamos', label: 'Como ajudamos' },
-  { href: '/#planos', label: 'Planos' },
-  { href: '/#sobre', label: 'Sobre' },
-  { href: '/#depoimentos', label: 'Depoimentos' },
-  { href: '/#contato', label: 'Contato' },
+  { href: withBase('#como-ajudamos'), label: 'Como ajudamos' },
+  { href: withBase('#planos'), label: 'Planos' },
+  { href: withBase('#sobre'), label: 'Sobre' },
+  { href: withBase('#depoimentos'), label: 'Depoimentos' },
+  { href: withBase('#contato'), label: 'Contato' },
 ];
 
 export default function SiteHeader() {
@@ -15,7 +16,7 @@ export default function SiteHeader() {
     <header className="site-header">
       <div className="site-header__shell">
         <div className="nav-pill">
-          <a className="nav-pill__brand" href="/">
+          <a className="nav-pill__brand" href={withBase('')}>
             Styllu&apos;s
           </a>
 
@@ -27,7 +28,7 @@ export default function SiteHeader() {
             ))}
           </nav>
 
-          <a className="nav-pill__cta shadow-animate" href="/#contato">
+          <a className="nav-pill__cta shadow-animate" href={withBase('#contato')}>
             Falar com especialista
           </a>
 
@@ -61,7 +62,7 @@ export default function SiteHeader() {
                 {link.label}
               </a>
             ))}
-            <a className="btn btn-primary shadow-animate" href="/#contato" onClick={() => setOpen(false)}>
+            <a className="btn btn-primary shadow-animate" href={withBase('#contato')} onClick={() => setOpen(false)}>
               Falar com especialista
             </a>
           </div>
