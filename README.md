@@ -48,7 +48,7 @@ Output goes to `dist/`.
 | `SiteHeader` | Sticky header + mobile menu |
 | `IntentPicker` | “O que trouxe você” flow → WhatsApp |
 | `PlanQuiz` | Plan recommendation quiz |
-| `Testimonials` | Show more / less |
+| `Testimonials` | Google reviews + show more / less |
 | `ContactForm` | Validated form → WhatsApp |
 
 ## Project structure
@@ -57,6 +57,7 @@ Output goes to `dist/`.
 src/
   pages/           # index, privacy, terms
   components/      # Astro + react/
+  data/            # Google reviews (static)
   layouts/
   styles/
 public/            # logo, favicon, _headers, _redirects

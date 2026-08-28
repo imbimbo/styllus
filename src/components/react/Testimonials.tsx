@@ -1,69 +1,226 @@
-import { useMemo, useState } from 'react';
+import { useCallback, useEffect, useRef, useState, type CSSProperties, type TouchEvent } from 'react';
+import googleReviews from '../../data/google-reviews.json';
 
-const testimonials = [
-  {
-    quote:
-      "A Styllu's é uma excelente empresa contábil, satisfação e conforto em ter um parceiro confiável e sempre muito atento às mudanças de leis, tributações e etc. Alguns profissionais em destaque, Sr. Jonas, Sr. Emerson, Sr. Felipe Rinaldi entre outros profissionais de alta qualidade. Gratidão em ter este time nos meus negócios.",
-    name: 'RASF Comercial',
-    role: 'CEO',
-  },
-  {
-    quote:
-      'A melhor empresa que você vai encontrar no país. Atendimento primoroso, todos os meses te ligam para saber se faltou algo, como podem melhorar? E sempre se superam. Nota 10. Recomendo com louvor.',
-    name: 'Jaime Albuquerque',
-    role: 'CEO',
-  },
-  {
-    quote:
-      "Quero compartilhar minha experiência positiva com a Styllu's Assessoria Contábil. Eles oferecem serviços excepcionais e são extremamente profissionais. O Felipe Rinaldi, em particular, é muito atencioso e sempre pronto para esclarecer dúvidas.",
-    name: 'Leilaine Campioto',
-    role: 'CEO • Znith',
-  },
-  {
-    quote:
-      "Estou com a Styllu's há 2 anos e tem sido uma experiência e tanto. Atendimento impecável em todos os setores. É maravilhoso conseguir ficar tranquila tocando as outras coisas da empresa sabendo que da parte contábil eu não tenho que me preocupar.",
-    name: 'Sara Bertelli',
-    role: 'CEO • Odontologista',
-  },
-  {
-    quote:
-      "Sou cliente da Styllu's há muitos anos, e super indico. Agilidade no atendimento, pró-atividade e excelência. Um lugar onde pude encontrar uma verdadeira parceria.",
-    name: 'Nathália Sobrinho',
-    role: 'CEO • Rs Artefatos de Madeira',
-  },
-  {
-    quote:
-      "Sou cliente há muitos anos e indico com certeza. Empresa séria, sólida e experiente e uma equipe excelente, prontamente a atender.",
-    name: 'Arnaldo Santos Bruno',
-    role: 'CEO • Santos Bruno Imóveis',
-  },
-];
+type GoogleReview = {
+  quote: string;
+  name: string;
+  role?: string;
+  rating?: number;
+};
+
+function Stars({ rating }: { rating: number }) {
+  const full = Math.round(rating);
+
+  return (
+    <span className="google-stars" aria-label={`${rating.toFixed(1)} de 5 estrelas`}>
+      {Array.from({ length: 5 }, (_, index) => (
+        <span key={index} aria-hidden="true">
+          {index < full ? '★' : '☆'}
+        </span>
+      ))}
+    </span>
+  );
+}
+
+function useSlidesPerView() {
+  const [slidesPerView, setSlidesPerView] = useState(1);
+
+  useEffect(() => {
+    const update = () => {
+      if (window.matchMedia('(min-width: 768px)').matches) {
+        setSlidesPerView(3);
+      } else if (window.matchMedia('(min-width: 640px)').matches) {
+        setSlidesPerView(2);
+      } else {
+        setSlidesPerView(1);
+      }
+    };
+
+    update();
+    window.addEventListener('resize', update);
+    return () => window.removeEventListener('resize', update);
+  }, []);
+
+  return slidesPerView;
+}
 
 export default function Testimonials() {
-  const [expanded, setExpanded] = useState(false);
-  const visible = useMemo(
-    () => (expanded ? testimonials : testimonials.slice(0, 3)),
-    [expanded],
+  const { reviews, rating, total, mapsUrl } = googleReviews;
+  const slidesPerView = useSlidesPerView();
+  const viewportRef = useRef<HTMLDivElement>(null);
+  const [slideSize, setSlideSize] = useState(0);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [touchStart, setTouchStart] = useState<number | null>(null);
+
+  const maxIndex = Math.max(0, reviews.length - slidesPerView);
+  const pageCount = maxIndex + 1;
+
+  useEffect(() => {
+    const viewport = viewportRef.current;
+    if (!viewport) return;
+
+    const update = () => {
+      setSlideSize(viewport.clientWidth / slidesPerView);
+    };
+
+    update();
+    const observer = new ResizeObserver(update);
+    observer.observe(viewport);
+    window.addEventListener('resize', update);
+
+    return () => {
+      observer.disconnect();
+      window.removeEventListener('resize', update);
+    };
+  }, [slidesPerView]);
+
+  useEffect(() => {
+    setCurrentIndex((index) => Math.min(index, maxIndex));
+  }, [maxIndex]);
+
+  const goTo = useCallback(
+    (index: number) => {
+      if (pageCount <= 1) return;
+      if (index < 0) {
+        setCurrentIndex(maxIndex);
+        return;
+      }
+      if (index > maxIndex) {
+        setCurrentIndex(0);
+        return;
+      }
+      setCurrentIndex(index);
+    },
+    [maxIndex, pageCount],
   );
+
+  const goPrev = () => goTo(currentIndex - 1);
+  const goNext = () => goTo(currentIndex + 1);
+
+  const viewportStyle = {
+    '--slide-size': `${slideSize}px`,
+  } as CSSProperties;
+
+  const trackStyle = {
+    transform: slideSize > 0 ? `translateX(-${currentIndex * slideSize}px)` : undefined,
+  } as CSSProperties;
+
+  function onTouchStart(event: TouchEvent) {
+    setTouchStart(event.touches[0].clientX);
+  }
+
+  function onTouchEnd(event: TouchEvent) {
+    if (touchStart === null) return;
+
+    const delta = event.changedTouches[0].clientX - touchStart;
+    if (Math.abs(delta) > 48) {
+      if (delta < 0) goNext();
+      else goPrev();
+    }
+
+    setTouchStart(null);
+  }
 
   return (
     <div>
-      <div className="grid-3">
-        {visible.map((item) => (
-          <blockquote key={item.name} className="quote">
-            <p>“{item.quote}”</p>
-            <footer>
-              {item.name}
-              <span>{item.role}</span>
-            </footer>
-          </blockquote>
-        ))}
+      <div className="google-reviews-summary">
+        <div className="google-reviews-summary__rating">
+          <Stars rating={rating} />
+          <strong className="google-reviews-summary__score text-gold-shine">{rating.toFixed(1)}</strong>
+          <span className="google-reviews-summary__count">{total} avaliações no Google</span>
+        </div>
+        <a
+          className="btn btn-outline google-reviews-summary__link"
+          href={mapsUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Ver no Google Maps
+        </a>
       </div>
-      <div className="testimonials-actions">
-        <button type="button" className="btn btn-outline" onClick={() => setExpanded((v) => !v)}>
-          {expanded ? 'Ver menos' : 'Ver mais depoimentos'}
-        </button>
+
+      <div className="reviews-carousel">
+        {pageCount > 1 && (
+          <button
+            type="button"
+            className="reviews-carousel__nav reviews-carousel__nav--prev"
+            onClick={goPrev}
+            aria-label="Depoimento anterior"
+          >
+            ←
+          </button>
+        )}
+
+        <div
+          ref={viewportRef}
+          className="reviews-carousel__viewport"
+          style={viewportStyle}
+          onTouchStart={onTouchStart}
+          onTouchEnd={onTouchEnd}
+        >
+          <div className="reviews-carousel__track" style={trackStyle} aria-live="polite">
+            {reviews.map((item) => (
+              <div
+                key={`${item.name}-${item.quote.slice(0, 24)}`}
+                className="reviews-carousel__slide"
+              >
+                <ReviewCard item={item} />
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {pageCount > 1 && (
+          <button
+            type="button"
+            className="reviews-carousel__nav reviews-carousel__nav--next"
+            onClick={goNext}
+            aria-label="Próximo depoimento"
+          >
+            →
+          </button>
+        )}
+
+        {pageCount > 1 && (
+          <div className="reviews-carousel__dots" role="tablist" aria-label="Depoimentos">
+            {Array.from({ length: pageCount }, (_, index) => (
+              <button
+                key={index}
+                type="button"
+                role="tab"
+                className={`reviews-carousel__dot ${index === currentIndex ? 'is-active' : ''}`}
+                aria-label={`Ir para depoimento ${index + 1}`}
+                aria-selected={index === currentIndex}
+                onClick={() => goTo(index)}
+              />
+            ))}
+          </div>
+        )}
       </div>
+
+      <p className="google-reviews-attribution">
+        Depoimentos publicados no Google pela Styllu&apos;s.{' '}
+        <a href={mapsUrl} target="_blank" rel="noopener noreferrer">
+          Escreva sua avaliação
+        </a>
+      </p>
     </div>
+  );
+}
+
+function ReviewCard({ item }: { item: GoogleReview }) {
+  return (
+    <blockquote className="quote">
+      {item.rating ? (
+        <div className="quote__stars" aria-label={`${item.rating} de 5 estrelas`}>
+          {'★'.repeat(item.rating)}
+        </div>
+      ) : null}
+      <p>“{item.quote}”</p>
+      <footer>
+        {item.name}
+        {item.role ? <span>{item.role}</span> : null}
+      </footer>
+    </blockquote>
   );
 }

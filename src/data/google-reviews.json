@@ -1,0 +1,72 @@
+{
+  "rating": 4.9,
+  "total": 63,
+  "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Styllu%27s+Assessoria+Cont%C3%A1bil+Rua+da+Bica+55+S%C3%A3o+Paulo",
+  "reviews": [
+    {
+      "quote": "A Styllu's é uma excelente empresa contábil, satisfação e conforto em ter um parceiro confiável e sempre muito atento às mudanças de leis, tributações e etc. Alguns profissionais em destaque, Sr. Jonas, Sr. Emerson, Sr. Felipe Rinaldi entre outros profissionais de alta qualidade. Gratidão em ter este time nos meus negócios.",
+      "name": "RASF Comercial",
+      "rating": 5
+    },
+    {
+      "quote": "A melhor empresa que você vai encontrar no país. Atendimento primoroso, todos os meses te ligam para saber se faltou algo, como podem melhorar? E sempre se superam. Nota 10. Recomendo com louvor.",
+      "name": "Jaime Albuquerque",
+      "rating": 5
+    },
+    {
+      "quote": "Quero compartilhar minha experiência positiva com a Styllu's Assessoria Contábil. Eles oferecem serviços excepcionais e são extremamente profissionais. O Felipe Rinaldi, em particular, é muito atencioso e sempre pronto para esclarecer dúvidas.",
+      "name": "Leilaine Campioto",
+      "role": "Znith",
+      "rating": 5
+    },
+    {
+      "quote": "Estou com a Styllu's há 2 anos e tem sido uma experiência e tanto. Atendimento impecável em todos os setores. É maravilhoso conseguir ficar tranquila tocando as outras coisas da empresa sabendo que da parte contábil eu não tenho que me preocupar.",
+      "name": "Sara Bertelli",
+      "role": "Odontologista",
+      "rating": 5
+    },
+    {
+      "quote": "Sou cliente da Styllu's há muitos anos, e super indico. Agilidade no atendimento, pró-atividade e excelência. Um lugar onde pude encontrar uma verdadeira parceria.",
+      "name": "Nathália Sobrinho",
+      "role": "Rs Artefatos de Madeira",
+      "rating": 5
+    },
+    {
+      "quote": "Sou cliente há muitos anos e indico com certeza. Empresa séria, sólida e experiente e uma equipe excelente, prontamente a atender.",
+      "name": "Arnaldo Santos Bruno",
+      "role": "Santos Bruno Imóveis",
+      "rating": 5
+    },
+    {
+      "quote": "Empresa com excelentes profissionais, líderes totalmente capacitados, prontos a esclarecer qualquer dúvida. Minha experiência na Styllus Assessoria Contábil foi maravilhosa.",
+      "name": "Ivonalda Gomes",
+      "rating": 5
+    },
+    {
+      "quote": "Equipe nota 10, profissionais qualificados e especializados para atendimento com excelência, em todas as demandas burocráticas, simplificando para o bom andamento empresarial e foco no crescimento.",
+      "name": "Suellen Alves Carneiro",
+      "rating": 5
+    },
+    {
+      "quote": "Atenção e qualidade de atendimento definem a Styllus! Sou cliente e não troco por nada.",
+      "name": "Fabricio Dohnal",
+      "rating": 5
+    },
+    {
+      "quote": "Atendimento e consultoria excelente!",
+      "name": "Gilberto Lucas",
+      "role": "Contemp Ar Condicionado",
+      "rating": 5
+    },
+    {
+      "quote": "Excelentes funcionários, ótima estrutura e de fácil acesso.",
+      "name": "Vinicius Vieira",
+      "rating": 5
+    },
+    {
+      "quote": "Bom atendimento e transparência.",
+      "name": "Ederaldo Vidal",
+      "rating": 5
+    }
+  ]
+}

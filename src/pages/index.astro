@@ -7,6 +7,9 @@ import PlanQuiz from '../components/react/PlanQuiz';
 import ContactForm from '../components/react/ContactForm';
 import Testimonials from '../components/react/Testimonials';
 import HeroActions from '../components/react/HeroActions';
+import googleReviews from '../data/google-reviews.json';
+
+const googleRating = googleReviews.rating.toFixed(1);
 
 const services = [
   {
@@ -124,7 +127,7 @@ const team = [
               <div class="stat-label">Clientes ativos</div>
             </div>
             <div>
-              <div class="stat-number">5★</div>
+              <div class="stat-number text-gold-shine">{googleRating}★</div>
               <div class="stat-label">Reputação de excelência</div>
             </div>
           </div>
