@@ -4,6 +4,7 @@ import Footer from '../components/Footer.astro';
 import SiteHeader from '../components/react/SiteHeader';
 import IntentPicker from '../components/react/IntentPicker';
 import PlanQuiz from '../components/react/PlanQuiz';
+import PlanIcon from '../components/PlanIcon.astro';
 import ContactForm from '../components/react/ContactForm';
 import Testimonials from '../components/react/Testimonials';
 import HeroActions from '../components/react/HeroActions';
@@ -58,21 +59,21 @@ const plans = [
   },
   {
     name: 'Prata',
-    badge: 'Mais contratado',
+    badge: 'Para crescer',
     featured: false,
     description: 'Sua equipe em dia, seus impostos em ordem: tranquilidade para crescer.',
     items: ['Tributário do Bronze', 'Folha de pagamento', 'Admissões/Demissões', 'eSocial completo', 'Suporte com analista dedicado'],
   },
   {
     name: 'Ouro',
-    badge: 'Mais Popular',
+    badge: 'Mais popular',
     featured: true,
     description: 'A visão completa do seu negócio para decidir com confiança todo mês.',
     items: ['Tudo do Prata', 'Balanços e demonstrativos', 'Relatórios gerenciais', 'Acompanhamento consultivo', 'Fluxo de caixa estratégico'],
   },
   {
     name: 'Premium',
-    badge: 'Estrutura mais completa',
+    badge: 'Mais completo',
     featured: false,
     description: 'Foco total no seu negócio: a Styllu\'s assume a operação financeira por você.',
     items: ['Tudo do Ouro', 'Rotina financeira completa', 'Conciliações bancárias', 'Análise avançada', 'Consultoria estratégica'],
@@ -235,10 +236,13 @@ const team = [
         </p>
         <div class="grid-4 plans-grid">
           {plans.map((plan) => (
-            <article class={`plan ${plan.featured ? 'plan--featured' : ''}`}>
+            <article class={`plan plan--${plan.name.toLowerCase()} ${plan.featured ? 'plan--featured' : ''}`}>
               <span class="plan__badge">{plan.badge}</span>
               <p class="plan__price">Sob consulta</p>
-              <h3>{plan.name}</h3>
+              <h3 class="plan__title">
+                <PlanIcon plan={plan.name} />
+                {plan.name}
+              </h3>
               <p class="plan__description">{plan.description}</p>
               <ul>
                 {plan.items.map((item) => <li>{item}</li>)}
