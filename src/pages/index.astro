@@ -141,7 +141,7 @@ const team = [
       <div class="container">
         <p class="eyebrow">Comece por aqui</p>
         <h2 class="section-title">O que trouxe você até a Styllu's?</h2>
-        <p class="section-lead" style="margin-bottom: 1.75rem;">
+        <p class="section-lead">
           Escolha o que mais se parece com o seu momento. A conversa começa daí, sem formulário longo.
         </p>
         <IntentPicker client:visible />
@@ -152,7 +152,7 @@ const team = [
       <div class="container">
         <p class="eyebrow">Como ajudamos</p>
         <h2 class="section-title">Como a Styllu's entra na sua história</h2>
-        <p class="section-lead" style="margin-bottom: 1.75rem;">
+        <p class="section-lead">
           Três caminhos, o mesmo cuidado: entender antes de propor.
         </p>
         <div class="grid-3">
@@ -187,7 +187,7 @@ const team = [
       <div class="container">
         <p class="eyebrow">Assessorias</p>
         <h2 class="section-title">O que você ganha com as nossas assessorias</h2>
-        <p class="section-lead" style="margin-bottom: 1.75rem;">Você cuida do seu negócio. A gente cuida de tudo o mais.</p>
+        <p class="section-lead">Você cuida do seu negócio. A gente cuida de tudo o mais.</p>
         <div class="grid-2">
           {services.map((service) => (
             <article class="feature-tile">
@@ -200,7 +200,7 @@ const team = [
             </article>
           ))}
         </div>
-        <p style="margin-top:1.5rem; color:hsl(var(--muted-foreground)); text-align:center;">
+        <p class="section-footnote">
           Suporte consultivo sempre que precisar • Tempo médio de resposta: até 24h úteis
         </p>
       </div>
@@ -210,7 +210,7 @@ const team = [
       <div class="container">
         <p class="eyebrow">Por que a Styllu's</p>
         <h2 class="section-title">Por que escolher a Styllu's?</h2>
-        <p class="section-lead" style="margin-bottom: 1.75rem;">Diferenciais que fazem a diferença no crescimento do seu negócio</p>
+        <p class="section-lead">Diferenciais que fazem a diferença no crescimento do seu negócio</p>
         <div class="grid-3">
           {differentials.map((item) => (
             <article class="feature-tile">
@@ -226,16 +226,16 @@ const team = [
       <div class="container">
         <p class="eyebrow">Planos</p>
         <h2 class="section-title">Uma assessoria que acompanha o momento da sua empresa</h2>
-        <p class="section-lead" style="margin-bottom: 1.75rem;">
+        <p class="section-lead">
           Do essencial à estrutura mais completa. Se não souber qual escolher, a gente descobre junto com você.
         </p>
-        <div class="grid-4" style="margin-bottom: 2rem;">
+        <div class="grid-4 plans-grid">
           {plans.map((plan) => (
             <article class={`plan ${plan.featured ? 'plan--featured' : ''}`}>
               <span class="plan__badge">{plan.badge}</span>
               <p class="plan__price">Sob consulta</p>
               <h3>{plan.name}</h3>
-              <p style="color:hsl(var(--muted-foreground)); font-size:0.92rem;">{plan.description}</p>
+              <p class="plan__description">{plan.description}</p>
               <ul>
                 {plan.items.map((item) => <li>{item}</li>)}
               </ul>
@@ -251,13 +251,13 @@ const team = [
           ))}
         </div>
 
-        <div class="grid-2" style="align-items:start;">
-          <div>
-            <h3 style="font-family:var(--font-display); font-size:1.4rem; margin-bottom:0.5rem;">Não sabe qual plano faz sentido?</h3>
-            <p style="color:hsl(var(--muted-foreground)); margin-bottom:1rem;">
+        <div class="grid-2">
+          <div class="plan-quiz-intro">
+            <h3>Não sabe qual plano faz sentido?</h3>
+            <p>
               Responda algumas perguntas rápidas e a gente indica um caminho, sem custo e sem compromisso.
             </p>
-            <p style="font-size:0.9rem; color:hsl(var(--muted-foreground));">
+            <p class="plan-quiz-note">
               <strong>Importante:</strong> os serviços podem ser personalizados conforme a necessidade e o porte da sua empresa.
             </p>
           </div>
@@ -270,7 +270,7 @@ const team = [
       <div class="container">
         <p class="eyebrow">Depoimentos</p>
         <h2 class="section-title">O que nossos clientes dizem</h2>
-        <p class="section-lead" style="margin-bottom: 1.75rem;">
+        <p class="section-lead">
           Histórias reais de transformação e crescimento com a Styllu's Assessoria Contábil.
         </p>
         <Testimonials client:visible />
@@ -281,7 +281,7 @@ const team = [
       <div class="container">
         <p class="eyebrow">Quem cuida do seu negócio</p>
         <h2 class="section-title">Pessoas reais. Relações reais.</h2>
-        <p class="section-lead" style="margin-bottom: 1.75rem;">
+        <p class="section-lead">
           Na Styllu's, cliente não fala com um número de protocolo. Fala com gente que conhece o nome da empresa, o histórico e o momento dela.
         </p>
         <div class="grid-3">
@@ -294,7 +294,7 @@ const team = [
             </article>
           ))}
         </div>
-        <p style="margin-top:1.5rem; color:hsl(var(--muted-foreground)); max-width:48rem;">
+        <p class="section-note">
           E ainda há um time inteiro de analistas, assistentes e gestores por trás de cada entrega, todos com o mesmo compromisso: cuidar do seu negócio como se fosse o nosso.
         </p>
       </div>
@@ -302,19 +302,19 @@ const team = [
 
     <section class="section section-alt" id="sobre">
       <div class="container about-block">
-        <div>
+        <div class="about-copy">
           <p class="eyebrow">Sobre</p>
           <h2 class="section-title">Conheça a Styllu's Assessoria Contábil</h2>
-          <p style="color:hsl(var(--muted-foreground)); margin-bottom:1rem;">
+          <p>
             São <strong>35 anos</strong> de história construída cliente a cliente, conversa por conversa. Começamos como um pequeno escritório de contabilidade em São Paulo e crescemos com uma convicção simples: o cliente não precisa entender de tributo, precisa de alguém de confiança para cuidar disso por ele.
           </p>
-          <p style="color:hsl(var(--muted-foreground)); margin-bottom:1rem;">
+          <p>
             Hoje somos um time de analistas, gestores e parceiros, diretores como a <strong>Tatiana</strong>, o <strong>Emerson</strong>, o <strong>Felipe Rinaldi</strong> e muitos outros líderes e colaboradores, que os clientes chamam pelo nome porque a relação é assim: próxima, atenta, presente no mês inteiro, não só no fechamento.
           </p>
-          <p style="color:hsl(var(--muted-foreground)); margin-bottom:1.25rem;">
+          <p>
             Cuidamos da parte chata para que o empreendedor possa cuidar do que ama. É isso que move a Styllu's desde o primeiro dia.
           </p>
-          <blockquote style="font-family:var(--font-display); font-size:1.25rem; margin-bottom:1.25rem;">
+          <blockquote class="about-quote">
             “Você cuida do seu negócio. A gente cuida de tudo o mais.”
           </blockquote>
           <a class="btn btn-primary" href="#contato">Falar com a nossa equipe</a>
@@ -323,14 +323,14 @@ const team = [
           <div class="mission-grid">
             <article class="mission-card">
               <h3>Missão</h3>
-              <p style="color:hsl(var(--muted-foreground));">Ressignificar a contabilidade com uma assessoria humanizada, prática e personalizada.</p>
+              <p>Ressignificar a contabilidade com uma assessoria humanizada, prática e personalizada.</p>
             </article>
             <article class="mission-card">
               <h3>Visão</h3>
-              <p style="color:hsl(var(--muted-foreground));">Ser referência nacional em assessoria consultiva reconhecida pela excelência no atendimento.</p>
+              <p>Ser referência nacional em assessoria consultiva reconhecida pela excelência no atendimento.</p>
             </article>
           </div>
-          <div class="hero__stats" style="margin-top:1.5rem; border:none; padding:0;">
+          <div class="hero__stats hero__stats--compact">
             <div>
               <div class="stat-number">35+</div>
               <div class="stat-label">Anos de história</div>
@@ -348,7 +348,7 @@ const team = [
       <div class="container">
         <p class="eyebrow">O próximo passo é seu</p>
         <h2 class="section-title">Pronto para focar só no seu negócio?</h2>
-        <p class="section-lead" style="margin-bottom: 1.75rem;">
+        <p class="section-lead">
           Conte o que sua empresa precisa. Em até 24h úteis a gente volta com um diagnóstico, sem custo e sem compromisso.
         </p>
         <div class="contact-grid">

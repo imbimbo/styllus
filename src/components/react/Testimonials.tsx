@@ -59,7 +59,7 @@ export default function Testimonials() {
           </blockquote>
         ))}
       </div>
-      <div style={{ marginTop: '1.5rem', textAlign: 'center' }}>
+      <div className="testimonials-actions">
         <button type="button" className="btn btn-outline" onClick={() => setExpanded((v) => !v)}>
           {expanded ? 'Ver menos' : 'Ver mais depoimentos'}
         </button>

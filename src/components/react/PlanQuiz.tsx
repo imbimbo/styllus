@@ -92,11 +92,9 @@ export default function PlanQuiz() {
     return (
       <div className="quiz-panel">
         <p className="eyebrow">Sugestão</p>
-        <h3 style={{ fontFamily: 'var(--font-display)', fontSize: '1.5rem', marginBottom: '0.5rem' }}>
-          Plano {result.plan}
-        </h3>
-        <p style={{ color: 'hsl(var(--muted-foreground))', marginBottom: '1rem' }}>{result.reason}</p>
-        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.75rem' }}>
+        <h3 className="quiz-panel__result-title">Plano {result.plan}</h3>
+        <p className="quiz-panel__result-text">{result.reason}</p>
+        <div className="quiz-actions">
           <a
             className="btn btn-primary"
             href={`${WA}?text=${encodeURIComponent(message)}`}
@@ -118,10 +116,8 @@ export default function PlanQuiz() {
       <p className="eyebrow">
         Pergunta {step + 1} de {questions.length}
       </p>
-      <h3 style={{ fontFamily: 'var(--font-display)', fontSize: '1.25rem', marginBottom: '1rem' }}>
-        {current.title}
-      </h3>
-      <div style={{ display: 'grid', gap: '0.65rem' }}>
+      <h3 className="quiz-panel__title">{current.title}</h3>
+      <div className="quiz-options">
         {current.options.map((option) => (
           <button
             key={option.value}

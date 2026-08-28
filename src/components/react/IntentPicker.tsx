@@ -63,7 +63,7 @@ export default function IntentPicker() {
       </div>
 
       {current && (
-        <div style={{ marginTop: '1.25rem', display: 'flex', flexWrap: 'wrap', gap: '0.75rem' }}>
+        <div className="intent-actions">
           <a
             className="btn btn-primary"
             href={`${WA}?text=${encodeURIComponent(current.message)}`}

@@ -54,10 +54,10 @@ export default function ContactForm() {
     return (
       <div className="form-success">
         <strong>Pronto!</strong>
-        <p style={{ marginTop: '0.35rem' }}>
+        <p>
           Abrimos o WhatsApp com sua mensagem. Se a janela não abriu, use o botão de WhatsApp ao lado.
         </p>
-        <button type="button" className="btn btn-outline" style={{ marginTop: '0.85rem' }} onClick={() => setStatus('idle')}>
+        <button type="button" className="btn btn-outline" onClick={() => setStatus('idle')}>
           Enviar outra mensagem
         </button>
       </div>
@@ -67,7 +67,7 @@ export default function ContactForm() {
   return (
     <form className="form-panel" onSubmit={onSubmit} noValidate>
       <p className="eyebrow">Prefere escrever?</p>
-      <p style={{ color: 'hsl(var(--muted-foreground))', marginBottom: '1rem', fontSize: '0.92rem' }}>
+      <p className="form-intro">
         Tempo médio de resposta: até 24h úteis
       </p>
 
@@ -132,10 +132,10 @@ export default function ContactForm() {
       </label>
       {errors.privacy && <span className="form-error">{errors.privacy}</span>}
 
-      <button type="submit" className="btn btn-primary" style={{ width: '100%' }}>
+      <button type="submit" className="btn btn-primary btn-block">
         Enviar mensagem
       </button>
-      <p style={{ marginTop: '0.85rem', fontSize: '0.8rem', color: 'hsl(var(--muted-foreground))' }}>
+      <p className="form-footnote">
         Levamos a privacidade a sério. Seus dados estão seguros e não serão compartilhados com terceiros.
       </p>
     </form>
