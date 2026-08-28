@@ -1416,6 +1416,12 @@ ul {
   color: #9fb0c2;
 }
 
+.footer-credit {
+  width: 100%;
+  margin: 0;
+  text-align: center;
+}
+
 .legal-page {
   padding: 6.5rem 0 4rem;
 }
