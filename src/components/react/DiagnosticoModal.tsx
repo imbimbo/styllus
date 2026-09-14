@@ -3,14 +3,16 @@ import { createPortal } from 'react-dom';
 
 const WA_NUMBER = '5511910155687';
 
-const MOMENTO_LABELS: Record<string, string> = {
+type Momento = 'abrir' | 'tenho' | 'trocar';
+
+const MOMENTO_LABELS: Record<Momento, string> = {
   abrir: 'Quero abrir minha empresa',
   tenho: 'Já tenho uma empresa',
   trocar: 'Quero trocar de contador',
 };
 
 type Answers = {
-  momento?: string;
+  momento?: Momento;
   segmento?: string;
   tamanho?: string;
   necessidade?: string;
@@ -19,65 +21,165 @@ type Answers = {
   whatsapp?: string;
 };
 
-const STEPS = [
-  {
-    key: 'momento' as const,
-    question: 'Qual é o seu momento agora?',
-    help: 'Escolha a opção que mais se parece com a sua situação.',
-    options: [
-      { value: 'abrir', label: 'Quero abrir minha empresa' },
-      { value: 'tenho', label: 'Já tenho uma empresa' },
-      { value: 'trocar', label: 'Quero trocar de contador' },
-    ],
-  },
-  {
-    key: 'segmento' as const,
-    question: 'Em que área sua empresa atua?',
-    help: 'Isso ajuda a entender as obrigações do seu negócio.',
-    options: [
-      { value: 'Comércio', label: 'Comércio ou loja' },
-      { value: 'Serviços', label: 'Prestação de serviços' },
-      { value: 'Saúde', label: 'Saúde, clínica ou consultório' },
-      { value: 'Alimentação', label: 'Alimentação ou food service' },
-      { value: 'Indústria', label: 'Indústria ou produção' },
-      { value: 'Outro', label: 'Outro segmento' },
-    ],
-  },
-  {
-    key: 'tamanho' as const,
-    question: 'Quantas pessoas trabalham com você?',
-    help: 'Considere sócios e funcionários registrados.',
-    options: [
-      { value: 'Ainda nenhum', label: 'Ainda nenhum' },
-      { value: '1 a 5', label: '1 a 5 pessoas' },
-      { value: '6 a 20', label: '6 a 20 pessoas' },
-      { value: 'Mais de 20', label: 'Mais de 20 pessoas' },
-    ],
-  },
-  {
-    key: 'necessidade' as const,
-    question: 'O que você mais precisa resolver?',
-    help: 'Pode escolher o ponto mais urgente.',
-    options: [
-      { value: 'Abrir empresa', label: 'Abrir a empresa do jeito certo' },
-      { value: 'Impostos', label: 'Entender e organizar os impostos' },
-      { value: 'Folha e equipe', label: 'Cuidar da folha e da equipe' },
-      { value: 'Relatórios', label: 'Ter relatórios para decidir' },
-      { value: 'Financeiro', label: 'Organizar o financeiro' },
-      { value: 'Não sei ainda', label: 'Ainda não sei, quero orientação' },
-    ],
-  },
-  {
-    key: 'financeiro' as const,
-    question: "Quer que a Styllu's cuide também da rotina financeira?",
-    help: 'Contas a pagar e receber, conciliações e fluxo de caixa.',
-    options: [
-      { value: 'Sim', label: 'Sim, isso me interessa' },
-      { value: 'Talvez', label: 'Talvez, quero entender melhor' },
-      { value: 'Não', label: 'Não, por enquanto não' },
-    ],
-  },
+type Step = {
+  key: keyof Pick<Answers, 'segmento' | 'tamanho' | 'necessidade' | 'financeiro'>;
+  question: string;
+  help: string;
+  options: { value: string; label: string }[];
+};
+
+const MOMENTO_OPTIONS = [
+  { value: 'abrir' as const, label: 'Quero abrir minha empresa' },
+  { value: 'tenho' as const, label: 'Já tenho uma empresa' },
+  { value: 'trocar' as const, label: 'Quero trocar de contador' },
 ];
+
+const FLOWS: Record<Momento, Step[]> = {
+  abrir: [
+    {
+      key: 'segmento',
+      question: 'Que tipo de negócio você quer abrir?',
+      help: 'Isso muda o caminho de abertura e as obrigações iniciais.',
+      options: [
+        { value: 'Comércio', label: 'Comércio ou loja' },
+        { value: 'Serviços', label: 'Prestação de serviços' },
+        { value: 'Saúde', label: 'Saúde, clínica ou consultório' },
+        { value: 'Alimentação', label: 'Alimentação ou food service' },
+        { value: 'Indústria', label: 'Indústria ou produção' },
+        { value: 'Outro', label: 'Outro segmento' },
+      ],
+    },
+    {
+      key: 'tamanho',
+      question: 'Você já sabe se terá sócios ou funcionários?',
+      help: 'Mesmo na abertura, isso altera o enquadramento e os custos.',
+      options: [
+        { value: 'Ainda nenhum', label: 'Só eu, por enquanto' },
+        { value: '1 a 5', label: 'Sócios, sem funcionários' },
+        { value: '6 a 20', label: 'Vou contratar funcionários' },
+        { value: 'Ainda não sei', label: 'Ainda não sei' },
+      ],
+    },
+    {
+      key: 'necessidade',
+      question: 'O que mais te preocupa na abertura?',
+      help: 'Vamos priorizar o que gera mais dúvida agora.',
+      options: [
+        { value: 'Abrir empresa', label: 'CNPJ, contratos e documentação' },
+        { value: 'Impostos', label: 'Escolher o regime tributário certo' },
+        { value: 'Folha e equipe', label: 'Contratar pessoas do jeito certo' },
+        { value: 'Financeiro', label: 'Entender custos e capital inicial' },
+        { value: 'Não sei ainda', label: 'Quero orientação completa do zero' },
+      ],
+    },
+    {
+      key: 'financeiro',
+      question: 'Quer organização financeira desde o início?',
+      help: 'Contas a pagar e receber, conciliações e fluxo de caixa.',
+      options: [
+        { value: 'Sim', label: 'Sim, quero começar organizado' },
+        { value: 'Talvez', label: 'Talvez, quero entender melhor' },
+        { value: 'Não', label: 'Não, por enquanto só a abertura' },
+      ],
+    },
+  ],
+  tenho: [
+    {
+      key: 'segmento',
+      question: 'Em que área sua empresa atua?',
+      help: 'Isso ajuda a entender as obrigações do seu negócio.',
+      options: [
+        { value: 'Comércio', label: 'Comércio ou loja' },
+        { value: 'Serviços', label: 'Prestação de serviços' },
+        { value: 'Saúde', label: 'Saúde, clínica ou consultório' },
+        { value: 'Alimentação', label: 'Alimentação ou food service' },
+        { value: 'Indústria', label: 'Indústria ou produção' },
+        { value: 'Outro', label: 'Outro segmento' },
+      ],
+    },
+    {
+      key: 'tamanho',
+      question: 'Quantas pessoas trabalham com você?',
+      help: 'Considere sócios e funcionários registrados.',
+      options: [
+        { value: 'Ainda nenhum', label: 'Só eu' },
+        { value: '1 a 5', label: '1 a 5 pessoas' },
+        { value: '6 a 20', label: '6 a 20 pessoas' },
+        { value: 'Mais de 20', label: 'Mais de 20 pessoas' },
+      ],
+    },
+    {
+      key: 'necessidade',
+      question: 'O que sua empresa mais precisa resolver agora?',
+      help: 'Escolha o ponto mais urgente no dia a dia.',
+      options: [
+        { value: 'Impostos', label: 'Impostos e obrigações em dia' },
+        { value: 'Folha e equipe', label: 'Folha, CLT e equipe' },
+        { value: 'Relatórios', label: 'Números claros para decidir' },
+        { value: 'Financeiro', label: 'Organizar o financeiro' },
+        { value: 'Não sei ainda', label: 'Quero um diagnóstico geral' },
+      ],
+    },
+    {
+      key: 'financeiro',
+      question: "Quer que a Styllu's cuide também da rotina financeira?",
+      help: 'Contas a pagar e receber, conciliações e fluxo de caixa.',
+      options: [
+        { value: 'Sim', label: 'Sim, isso me interessa' },
+        { value: 'Talvez', label: 'Talvez, quero entender melhor' },
+        { value: 'Não', label: 'Não, por enquanto não' },
+      ],
+    },
+  ],
+  trocar: [
+    {
+      key: 'segmento',
+      question: 'Em que área sua empresa atua?',
+      help: 'Ajuda a preparar a transição com o contexto certo.',
+      options: [
+        { value: 'Comércio', label: 'Comércio ou loja' },
+        { value: 'Serviços', label: 'Prestação de serviços' },
+        { value: 'Saúde', label: 'Saúde, clínica ou consultório' },
+        { value: 'Alimentação', label: 'Alimentação ou food service' },
+        { value: 'Indústria', label: 'Indústria ou produção' },
+        { value: 'Outro', label: 'Outro segmento' },
+      ],
+    },
+    {
+      key: 'tamanho',
+      question: 'Qual o tamanho da operação hoje?',
+      help: 'Isso influencia o volume da transição contábil.',
+      options: [
+        { value: 'Ainda nenhum', label: 'Só eu' },
+        { value: '1 a 5', label: '1 a 5 pessoas' },
+        { value: '6 a 20', label: '6 a 20 pessoas' },
+        { value: 'Mais de 20', label: 'Mais de 20 pessoas' },
+      ],
+    },
+    {
+      key: 'necessidade',
+      question: 'Por que você quer trocar de contador?',
+      help: 'Conte o que mais te incomoda hoje. Isso guia a transição.',
+      options: [
+        { value: 'Impostos', label: 'Erros, atrasos ou impostos confusos' },
+        { value: 'Relatórios', label: 'Pouca orientação e poucos números' },
+        { value: 'Folha e equipe', label: 'Problemas com folha e pessoal' },
+        { value: 'Financeiro', label: 'Quero alguém mais próximo do financeiro' },
+        { value: 'Não sei ainda', label: 'Busco mais atenção e parceria' },
+      ],
+    },
+    {
+      key: 'financeiro',
+      question: 'Além da contabilidade, precisa de BPO financeiro?',
+      help: 'Podemos assumir a rotina financeira junto com a transição.',
+      options: [
+        { value: 'Sim', label: 'Sim, quero isso na troca' },
+        { value: 'Talvez', label: 'Talvez, quero entender melhor' },
+        { value: 'Não', label: 'Não, só a contabilidade por agora' },
+      ],
+    },
+  ],
+};
 
 function suggestPlan(answers: Answers) {
   if (answers.financeiro === 'Sim') return 'Premium';
@@ -111,31 +213,25 @@ function buildWhatsAppUrl(answers: Answers, plan: string) {
 type Props = {
   open: boolean;
   onClose: () => void;
-  initialMomento?: string;
-  initialNecessidade?: string;
+  initialMomento?: Momento;
 };
 
-export default function DiagnosticoModal({
-  open,
-  onClose,
-  initialMomento,
-  initialNecessidade,
-}: Props) {
+export default function DiagnosticoModal({ open, onClose, initialMomento }: Props) {
   const titleId = useId();
-  const totalSteps = STEPS.length + 1;
   const [step, setStep] = useState(0);
   const [answers, setAnswers] = useState<Answers>({});
   const [done, setDone] = useState(false);
+  const [lockedMomento, setLockedMomento] = useState(false);
 
   useEffect(() => {
     if (!open) return;
     const next: Answers = {};
     if (initialMomento) next.momento = initialMomento;
-    if (initialNecessidade) next.necessidade = initialNecessidade;
     setAnswers(next);
-    setStep(initialMomento ? 1 : 0);
+    setStep(0);
     setDone(false);
-  }, [open, initialMomento, initialNecessidade]);
+    setLockedMomento(Boolean(initialMomento));
+  }, [open, initialMomento]);
 
   useEffect(() => {
     if (!open) return;
@@ -151,15 +247,35 @@ export default function DiagnosticoModal({
     };
   }, [open, onClose]);
 
+  const flow = answers.momento ? FLOWS[answers.momento] : null;
+  const selectingMomento = !answers.momento;
+  const totalSteps = (flow?.length ?? FLOWS.abrir.length) + 1;
+  const isContactStep = Boolean(flow) && step >= flow!.length;
+  const current = flow?.[step];
   const plan = useMemo(() => suggestPlan(answers), [answers]);
-  const isContactStep = step === STEPS.length;
-  const current = STEPS[step];
   const canSubmit = Boolean(answers.nome?.trim() && answers.whatsapp?.trim());
   const firstName = answers.nome?.trim().split(/\s+/)[0];
+  const canGoBack = step > 0 || (Boolean(answers.momento) && !lockedMomento);
 
-  function choose(key: keyof Answers, value: string) {
+  function chooseMomento(value: Momento) {
+    setAnswers({ momento: value });
+    setStep(0);
+  }
+
+  function choose(key: Step['key'], value: string) {
     setAnswers((prev) => ({ ...prev, [key]: value }));
-    setStep((prev) => Math.min(prev + 1, STEPS.length));
+    setStep((prev) => prev + 1);
+  }
+
+  function goBack() {
+    if (step > 0) {
+      setStep((prev) => prev - 1);
+      return;
+    }
+    if (answers.momento && !lockedMomento) {
+      setAnswers({});
+      setStep(0);
+    }
   }
 
   function openWhatsApp() {
@@ -173,6 +289,8 @@ export default function DiagnosticoModal({
   }
 
   if (!open || typeof document === 'undefined') return null;
+
+  const progressIndex = selectingMomento ? 1 : Math.min(step + 1, totalSteps);
 
   return createPortal(
     <div className="diag-overlay" role="presentation" onClick={onClose}>
@@ -209,14 +327,31 @@ export default function DiagnosticoModal({
             <div className="diag-progress">
               <span className="diag-progress__label">Diagnóstico gratuito</span>
               <span>
-                Etapa {step + 1} de {totalSteps}
+                Etapa {progressIndex} de {totalSteps}
               </span>
             </div>
             <div className="diag-progress__bar" aria-hidden="true">
-              <div style={{ width: `${((step + 1) / totalSteps) * 100}%` }} />
+              <div style={{ width: `${(progressIndex / totalSteps) * 100}%` }} />
             </div>
 
-            {isContactStep ? (
+            {selectingMomento ? (
+              <div>
+                <h2 id={titleId}>Qual é o seu momento agora?</h2>
+                <p className="diag-help">Escolha a opção que mais se parece com a sua situação.</p>
+                <div className="diag-options">
+                  {MOMENTO_OPTIONS.map((option) => (
+                    <button
+                      key={option.value}
+                      type="button"
+                      className="diag-option"
+                      onClick={() => chooseMomento(option.value)}
+                    >
+                      {option.label}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            ) : isContactStep ? (
               <div className="diag-contact">
                 <h2 id={titleId}>Para onde levamos o seu diagnóstico?</h2>
                 <p>Sem custo e sem compromisso. Retorno em até 24h úteis.</p>
@@ -255,7 +390,7 @@ export default function DiagnosticoModal({
                   Usamos seus dados apenas para entrar em contato sobre este diagnóstico.
                 </p>
               </div>
-            ) : (
+            ) : current ? (
               <div>
                 <h2 id={titleId}>{current.question}</h2>
                 <p className="diag-help">{current.help}</p>
@@ -273,10 +408,10 @@ export default function DiagnosticoModal({
                   ))}
                 </div>
               </div>
-            )}
+            ) : null}
 
-            {step > 0 && (
-              <button type="button" className="diag-back" onClick={() => setStep((prev) => Math.max(0, prev - 1))}>
+            {canGoBack && (
+              <button type="button" className="diag-back" onClick={goBack}>
                 ← Voltar
               </button>
             )}
