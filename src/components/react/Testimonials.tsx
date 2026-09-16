@@ -129,6 +129,15 @@ export default function Testimonials() {
           <Stars rating={rating} />
           <strong className="google-reviews-summary__score text-gold-shine">{rating.toFixed(1)}</strong>
           <span className="google-reviews-summary__count">{total} avaliações no Google</span>
+          <span className="google-reviews-summary__divider" aria-hidden="true" />
+          <a
+            className="google-reviews-summary__reclame"
+            href="https://www.reclameaqui.com.br/empresa/stylus-assistencia-contabil/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            0 reclamações no Reclame Aqui
+          </a>
         </div>
         <a
           className="btn btn-outline google-reviews-summary__link"

@@ -998,6 +998,32 @@ ul {
   font-size: 0.95rem;
 }
 
+.google-reviews-summary__divider {
+  display: none;
+  width: 1px;
+  height: 1.1rem;
+  background: hsl(var(--border));
+}
+
+@media (min-width: 640px) {
+  .google-reviews-summary__divider {
+    display: block;
+  }
+}
+
+.google-reviews-summary__reclame {
+  color: hsl(var(--foreground));
+  font-size: 0.95rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.google-reviews-summary__reclame:hover {
+  color: hsl(var(--primary));
+  text-decoration: underline;
+  text-underline-offset: 0.18em;
+}
+
 .google-stars {
   display: inline-flex;
   gap: 0.08em;
