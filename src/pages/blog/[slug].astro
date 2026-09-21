@@ -1,0 +1,140 @@
+---
+import { PortableText } from 'astro-portabletext';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Footer from '../../components/Footer.astro';
+import SiteHeader from '../../components/react/SiteHeader';
+import { getPost, getPostStaticPaths, urlFor } from '../../lib/sanity';
+import { withBase } from '../../lib/base';
+
+export async function getStaticPaths() {
+  return await getPostStaticPaths();
+}
+
+const { slug } = Astro.params;
+const post = await getPost(slug!);
+
+if (!post) {
+  throw new Error(`Post not found: ${slug}`);
+}
+
+function formatDate(value?: string) {
+  if (!value) return '';
+  return new Intl.DateTimeFormat('pt-BR', {
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric',
+  }).format(new Date(value));
+}
+---
+
+<BaseLayout
+  title={`${post.title} | Styllu's Blog`}
+  description={post.excerpt || `Artigo: ${post.title}`}
+>
+  <SiteHeader client:load />
+  <main class="post-page">
+    <article class="container post">
+      <p class="back">
+        <a href={withBase('blog')}>← Blog</a>
+      </p>
+      {post.category && <p class="category">{post.category}</p>}
+      <h1>{post.title}</h1>
+      {
+        post.publishedAt && (
+          <time datetime={post.publishedAt}>{formatDate(post.publishedAt)}</time>
+        )
+      }
+      {
+        post.mainImage && (
+          <img
+            class="cover"
+            src={urlFor(post.mainImage).width(1200).height(630).url()}
+            alt=""
+            width="1200"
+            height="630"
+          />
+        )
+      }
+      {
+        post.body && (
+          <div class="prose">
+            <PortableText value={post.body} />
+          </div>
+        )
+      }
+    </article>
+  </main>
+  <Footer />
+</BaseLayout>
+
+<style>
+  .post-page {
+    padding: calc(5rem + var(--section-y) * 0.4) 0 var(--section-y);
+  }
+
+  .post {
+    max-width: 46rem;
+  }
+
+  .back {
+    margin-bottom: var(--space-lg);
+  }
+
+  .back a {
+    color: hsl(var(--primary));
+    font-weight: 600;
+  }
+
+  .category {
+    color: hsl(var(--primary));
+    font-weight: 600;
+    margin-bottom: var(--space-sm);
+  }
+
+  h1 {
+    font-size: clamp(2rem, 4vw, 2.75rem);
+    margin-bottom: var(--space-md);
+  }
+
+  time {
+    display: block;
+    color: hsl(var(--muted-foreground));
+    margin-bottom: var(--space-xl);
+  }
+
+  .cover {
+    width: 100%;
+    border-radius: var(--radius);
+    margin-bottom: var(--space-2xl);
+  }
+
+  .prose {
+    font-size: 1.0625rem;
+    line-height: 1.75;
+  }
+
+  .prose :global(p) {
+    margin: 0 0 var(--space-lg);
+  }
+
+  .prose :global(h2),
+  .prose :global(h3) {
+    margin: var(--space-2xl) 0 var(--space-md);
+  }
+
+  .prose :global(ul),
+  .prose :global(ol) {
+    margin: 0 0 var(--space-lg);
+    padding-left: 1.25rem;
+  }
+
+  .prose :global(a) {
+    color: hsl(var(--primary));
+    text-decoration: underline;
+  }
+
+  .prose :global(img) {
+    border-radius: var(--radius);
+    margin: var(--space-xl) 0;
+  }
+</style>

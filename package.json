@@ -13,11 +13,19 @@
   },
   "dependencies": {
     "@astrojs/react": "^6.0.4",
+    "@sanity/astro": "^3.5.1",
+    "@sanity/client": "^8.6.2",
+    "@sanity/image-url": "^2.1.1",
     "@types/react": "^19.2.18",
     "@types/react-dom": "^19.2.5",
     "astro": "^7.2.9",
-    "react": "^19.2.8",
-    "react-dom": "^19.2.8"
+    "astro-portabletext": "^1.0.1",
+    "groq": "^6.15.0",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0",
+    "react-is": "^19.3.0",
+    "sanity": "^6.15.0",
+    "styled-components": "^6.5.3"
   },
   "allowScripts": {
     "esbuild": true

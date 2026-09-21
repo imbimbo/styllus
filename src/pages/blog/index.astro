@@ -1,0 +1,165 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Footer from '../../components/Footer.astro';
+import SiteHeader from '../../components/react/SiteHeader';
+import { getPosts, urlFor } from '../../lib/sanity';
+import { withBase } from '../../lib/base';
+
+const posts = await getPosts();
+
+function formatDate(value?: string) {
+  if (!value) return '';
+  return new Intl.DateTimeFormat('pt-BR', {
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric',
+  }).format(new Date(value));
+}
+---
+
+<BaseLayout
+  title="Blog | Styllu's Assessoria Contábil"
+  description="Artigos sobre contabilidade, tributário, trabalhista e gestão para empresas."
+>
+  <SiteHeader client:load />
+  <main class="blog-page">
+    <section class="blog-hero">
+      <div class="container">
+        <p class="eyebrow">Blog</p>
+        <h1>Conteúdo para decidir com mais clareza</h1>
+        <p class="lead">Artigos sobre contabilidade, tributos e rotina empresarial.</p>
+      </div>
+    </section>
+
+    <section class="blog-list">
+      <div class="container">
+        {
+          posts.length === 0 ? (
+            <p class="empty">Nenhum post publicado ainda. Publique no Sanity Studio para ver aqui.</p>
+          ) : (
+            <ul class="post-grid">
+              {posts.map((post) => (
+                <li>
+                  <a class="post-card" href={withBase(`blog/${post.slug.current}`)}>
+                    {post.mainImage && (
+                      <img
+                        src={urlFor(post.mainImage).width(640).height(360).url()}
+                        alt=""
+                        width="640"
+                        height="360"
+                      />
+                    )}
+                    <div class="post-card__body">
+                      {post.category && <span class="post-card__category">{post.category}</span>}
+                      <h2>{post.title}</h2>
+                      {post.excerpt && <p>{post.excerpt}</p>}
+                      {post.publishedAt && <time datetime={post.publishedAt}>{formatDate(post.publishedAt)}</time>}
+                    </div>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          )
+        }
+      </div>
+    </section>
+  </main>
+  <Footer />
+</BaseLayout>
+
+<style>
+  .blog-page {
+    padding-top: 5rem;
+  }
+
+  .blog-hero {
+    padding: var(--section-y) 0 calc(var(--section-y) * 0.55);
+    background: hsl(var(--section-alt));
+  }
+
+  .eyebrow {
+    color: hsl(var(--primary));
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    font-size: 0.85rem;
+    margin-bottom: var(--space-sm);
+  }
+
+  .blog-hero h1 {
+    font-size: clamp(2rem, 4vw, 3rem);
+    max-width: 16ch;
+    margin-bottom: var(--space-md);
+  }
+
+  .lead {
+    color: hsl(var(--muted-foreground));
+    max-width: 42ch;
+    font-size: 1.125rem;
+  }
+
+  .blog-list {
+    padding: var(--section-y) 0;
+  }
+
+  .empty {
+    color: hsl(var(--muted-foreground));
+  }
+
+  .post-grid {
+    list-style: none;
+    display: grid;
+    gap: var(--space-xl);
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  }
+
+  .post-card {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    border: 1px solid hsl(var(--border));
+    border-radius: var(--radius);
+    overflow: hidden;
+    background: hsl(var(--card));
+    transition: box-shadow 0.2s ease, transform 0.2s ease;
+  }
+
+  .post-card:hover {
+    box-shadow: var(--shadow-medium);
+    transform: translateY(-2px);
+  }
+
+  .post-card img {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+  }
+
+  .post-card__body {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+    padding: var(--space-lg);
+  }
+
+  .post-card__category {
+    color: hsl(var(--primary));
+    font-size: 0.85rem;
+    font-weight: 600;
+  }
+
+  .post-card h2 {
+    font-size: 1.25rem;
+  }
+
+  .post-card p {
+    color: hsl(var(--muted-foreground));
+    font-size: 0.95rem;
+  }
+
+  .post-card time {
+    margin-top: auto;
+    color: hsl(var(--muted-foreground));
+    font-size: 0.85rem;
+  }
+</style>
