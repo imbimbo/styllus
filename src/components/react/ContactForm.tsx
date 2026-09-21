@@ -46,7 +46,7 @@ export default function ContactForm() {
       `Mensagem: ${fields.message}`,
     ].join('\n');
 
-    window.open(`https://wa.me/5511910155687?text=${encodeURIComponent(text)}`, '_blank', 'noopener,noreferrer');
+    window.open(`https://wa.me/5511937746793?text=${encodeURIComponent(text)}`, '_blank', 'noopener,noreferrer');
     setStatus('success');
     setFields(initial);
   }

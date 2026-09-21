@@ -6,6 +6,7 @@ const links = [
   { href: withBase('#planos'), label: 'Planos' },
   { href: withBase('#sobre'), label: 'Sobre' },
   { href: withBase('#depoimentos'), label: 'Depoimentos' },
+  { href: withBase('blog'), label: 'Blog' },
   { href: withBase('#contato'), label: 'Contato' },
 ];
 
