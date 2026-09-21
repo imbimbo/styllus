@@ -2,7 +2,7 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Footer from '../../components/Footer.astro';
 import SiteHeader from '../../components/react/SiteHeader';
-import { getPosts, urlFor } from '../../lib/sanity';
+import { displayCategory, getPosts, urlFor } from '../../lib/sanity';
 import { withBase } from '../../lib/base';
 
 const posts = await getPosts();
@@ -38,7 +38,9 @@ function formatDate(value?: string) {
             <p class="empty">Nenhum post publicado ainda. Publique no Sanity Studio para ver aqui.</p>
           ) : (
             <ul class="post-grid">
-              {posts.map((post) => (
+              {posts.map((post) => {
+                const category = displayCategory(post.category);
+                return (
                 <li>
                   <a class="post-card" href={withBase(`blog/${post.slug.current}`)}>
                     {post.mainImage && (
@@ -50,14 +52,15 @@ function formatDate(value?: string) {
                       />
                     )}
                     <div class="post-card__body">
-                      {post.category && <span class="post-card__category">{post.category}</span>}
+                      {category && <span class="post-card__category">{category}</span>}
                       <h2>{post.title}</h2>
                       {post.excerpt && <p>{post.excerpt}</p>}
                       {post.publishedAt && <time datetime={post.publishedAt}>{formatDate(post.publishedAt)}</time>}
                     </div>
                   </a>
                 </li>
-              ))}
+                );
+              })}
             </ul>
           )
         }

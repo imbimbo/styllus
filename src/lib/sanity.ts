@@ -39,6 +39,12 @@ export function urlFor(source: SanityImageSource) {
   return builder.image(source)
 }
 
+/** Hide WordPress placeholder category from the UI. */
+export function displayCategory(category?: string | null) {
+  if (!category || category.trim().toLowerCase() === 'sem categoria') return undefined
+  return category
+}
+
 export async function getPosts() {
   return sanityClient.fetch(POSTS_QUERY)
 }

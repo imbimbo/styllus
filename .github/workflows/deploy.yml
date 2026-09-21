@@ -28,6 +28,8 @@ jobs:
           package-manager: npm@latest
         env:
           GITHUB_PAGES: 'true'
+          PUBLIC_SANITY_PROJECT_ID: s3fwnviw
+          PUBLIC_SANITY_DATASET: production
 
   deploy:
     needs: build

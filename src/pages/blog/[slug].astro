@@ -3,7 +3,7 @@ import { PortableText } from 'astro-portabletext';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Footer from '../../components/Footer.astro';
 import SiteHeader from '../../components/react/SiteHeader';
-import { getPost, getPostStaticPaths, urlFor } from '../../lib/sanity';
+import { displayCategory, getPost, getPostStaticPaths, urlFor } from '../../lib/sanity';
 import { withBase } from '../../lib/base';
 
 export async function getStaticPaths() {
@@ -16,6 +16,8 @@ const post = await getPost(slug!);
 if (!post) {
   throw new Error(`Post not found: ${slug}`);
 }
+
+const category = displayCategory(post.category);
 
 function formatDate(value?: string) {
   if (!value) return '';
@@ -37,7 +39,7 @@ function formatDate(value?: string) {
       <p class="back">
         <a href={withBase('blog')}>← Blog</a>
       </p>
-      {post.category && <p class="category">{post.category}</p>}
+      {category && <p class="category">{category}</p>}
       <h1>{post.title}</h1>
       {
         post.publishedAt && (
