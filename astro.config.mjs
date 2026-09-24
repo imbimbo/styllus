@@ -10,12 +10,17 @@ const { PUBLIC_SANITY_PROJECT_ID, PUBLIC_SANITY_DATASET } = loadEnv(
   '',
 );
 
-const isGithubPages = process.env.GITHUB_PAGES === 'true';
+// Project Pages preview (imbimbo.github.io/styllus) needs base `/styllus`.
+// Custom domain (www.stylluscontabil.com.br) must use base `/`.
+const useGithubProjectPath =
+  process.env.GITHUB_PAGES === 'true' && process.env.CUSTOM_DOMAIN !== 'true';
 
 // https://astro.build/config
 export default defineConfig({
-  site: isGithubPages ? 'https://imbimbo.github.io' : 'https://www.stylluscontabil.com.br',
-  base: isGithubPages ? '/styllus' : undefined,
+  site: useGithubProjectPath
+    ? 'https://imbimbo.github.io'
+    : 'https://www.stylluscontabil.com.br',
+  base: useGithubProjectPath ? '/styllus' : undefined,
   integrations: [
     react(),
     sanity({

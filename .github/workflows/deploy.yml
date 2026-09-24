@@ -28,6 +28,7 @@ jobs:
           package-manager: npm@latest
         env:
           GITHUB_PAGES: 'true'
+          CUSTOM_DOMAIN: 'true'
           PUBLIC_SANITY_PROJECT_ID: s3fwnviw
           PUBLIC_SANITY_DATASET: production
 
