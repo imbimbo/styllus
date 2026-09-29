@@ -1323,6 +1323,90 @@ ul {
   line-height: 1.55;
 }
 
+.history {
+  margin-top: var(--space-2xl);
+  padding-top: var(--section-y);
+  border-top: 1px solid hsl(var(--border) / 0.7);
+}
+
+.history__intro {
+  display: grid;
+  gap: var(--space-xl);
+  align-items: center;
+}
+
+.history__photo {
+  margin: 0;
+  max-width: 22rem;
+}
+
+.history__photo img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  object-position: top;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-medium);
+}
+
+.history__photo figcaption {
+  margin-top: var(--space-xs);
+  font-size: 0.85rem;
+  color: hsl(var(--muted-foreground));
+}
+
+.history__copy .section-title {
+  margin-bottom: var(--space-md);
+}
+
+.history__copy p {
+  color: hsl(var(--muted-foreground));
+  margin-bottom: var(--space-md);
+  line-height: 1.65;
+}
+
+.timeline {
+  list-style: none;
+  margin: var(--space-2xl) 0 0;
+  padding: 0;
+  display: grid;
+  gap: var(--space-lg);
+  position: relative;
+}
+
+.timeline__item {
+  position: relative;
+  padding-left: var(--space-xl);
+  border-left: 2px solid hsl(var(--primary) / 0.25);
+}
+
+.timeline__item::before {
+  content: '';
+  position: absolute;
+  left: -7px;
+  top: 0.35rem;
+  width: 12px;
+  height: 12px;
+  border-radius: 999px;
+  background: hsl(var(--primary));
+  box-shadow: 0 0 0 4px hsl(var(--primary-lighter));
+}
+
+.timeline__year {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: hsl(var(--primary));
+  margin-bottom: var(--space-2xs);
+}
+
+.timeline__item p {
+  color: hsl(var(--muted-foreground));
+  line-height: 1.6;
+}
+
 .plan-quiz-intro h3 {
   font-family: var(--font-display);
   font-size: 1.4rem;
@@ -1787,6 +1871,23 @@ ul {
 
   .mission-grid {
     grid-template-columns: 1fr 1fr;
+  }
+
+  .history__intro {
+    grid-template-columns: 0.8fr 1.2fr;
+    gap: var(--space-2xl);
+  }
+
+  .timeline {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: var(--space-2xl);
+  }
+}
+
+@media (min-width: 1024px) {
+  .timeline {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    column-gap: var(--space-lg);
   }
 }
 

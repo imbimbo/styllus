@@ -100,6 +100,25 @@ const team = [
     bio: 'Atendimento de proximidade. Acompanha cada cliente como se fosse o único, e os depoimentos provam.',
   },
 ];
+
+const milestones = [
+  {
+    year: '1990',
+    text: 'Um quarto na Nossa Senhora do Ó, uma máquina de escrever e os primeiros clientes. Um deles, o Açougue Guaraci, continua com a gente até hoje.',
+  },
+  {
+    year: '1993',
+    text: 'Rua Cajati e o primeiro computador. A máquina de escrever começa a se aposentar.',
+  },
+  {
+    year: '1998',
+    text: 'A crise da Rússia chega ao Brasil, os juros passam de 40% ao ano e o país recorre ao FMI. No meio da turbulência, chega a Zilma, que gerenciou o escritório por 17 anos.',
+  },
+  {
+    year: '2010',
+    text: 'Depois de quase dez endereços, dois deles em cima de padaria e um onde chovia mais dentro do que fora, a casa própria na Rua da Bica. Dez pessoas e nenhum proprietário para pedir o imóvel de volta.',
+  },
+];
 ---
 
 <BaseLayout>
@@ -349,6 +368,41 @@ const team = [
             </div>
           </div>
         </div>
+      </div>
+
+      <div class="container history">
+        <div class="history__intro">
+          <figure class="history__photo">
+            <img
+              src={withBase('mauro-roseli-rinaldi.jpg')}
+              alt="Mauro e Roseli Rinaldi, fundadores da Styllu's"
+              width="599"
+              height="1024"
+              loading="lazy"
+              decoding="async"
+            />
+            <figcaption>Mauro e Roseli Rinaldi, fundadores</figcaption>
+          </figure>
+          <div class="history__copy">
+            <p class="eyebrow">Nossa história</p>
+            <h2 class="section-title">Um novo estilo de contabilidade. Desde 1990.</h2>
+            <p>
+              Em maio de 1990, três meses depois do Plano Collor, <strong>Mauro e Roseli Rinaldi</strong> abriram a Styllu's num quarto da casa da família, na Avenida Nossa Senhora do Ó. Pouco depois, <strong>Simone</strong> chegou trazendo a primeira máquina de escrever do escritório.
+            </p>
+            <p>
+              Numa época em que tudo era escritório contábil, a ideia era outra: ser assessoria. Ir até o cliente, entender o negócio, atender de perto. O slogan nasceu junto com o nome e continua explicando tudo: <strong>um novo estilo de contabilidade</strong>.
+            </p>
+          </div>
+        </div>
+
+        <ol class="timeline">
+          {milestones.map((m) => (
+            <li class="timeline__item">
+              <span class="timeline__year">{m.year}</span>
+              <p>{m.text}</p>
+            </li>
+          ))}
+        </ol>
       </div>
     </section>
 
