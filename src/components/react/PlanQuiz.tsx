@@ -61,7 +61,7 @@ function recommend(answers: Answers) {
   };
 }
 
-const WA = 'https://wa.me/5511937746793';
+const WA = 'https://wa.me/5511998547114';
 
 export default function PlanQuiz() {
   const [step, setStep] = useState(0);

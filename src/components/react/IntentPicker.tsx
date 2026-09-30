@@ -39,7 +39,7 @@ const intents = [
   },
 ];
 
-const WA = 'https://wa.me/5511937746793';
+const WA = 'https://wa.me/5511998547114';
 
 export default function IntentPicker() {
   const [selected, setSelected] = useState<string | null>(null);
