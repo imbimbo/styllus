@@ -234,103 +234,6 @@ const milestones = [
       </div>
     </section>
 
-    <section class="section section-alt" id="diferenciais">
-      <div class="container">
-        <p class="eyebrow">Por que a Styllu's</p>
-        <h2 class="section-title">Por que escolher a Styllu's?</h2>
-        <p class="section-lead">Diferenciais que fazem a diferença no crescimento do seu negócio</p>
-        <div class="grid-3">
-          {differentials.map((item) => (
-            <article class="feature-tile">
-              <h3>{item.title}</h3>
-              <p>{item.text}</p>
-            </article>
-          ))}
-        </div>
-      </div>
-    </section>
-
-    <section class="section" id="planos">
-      <div class="container">
-        <p class="eyebrow">Planos</p>
-        <h2 class="section-title">Uma assessoria que acompanha o momento da sua empresa</h2>
-        <p class="section-lead">
-          Do essencial à estrutura mais completa. Se não souber qual escolher, a gente descobre junto com você.
-        </p>
-        <div class="grid-4 plans-grid">
-          {plans.map((plan) => (
-            <article class={`plan plan--${plan.name.toLowerCase()} ${plan.featured ? 'plan--featured' : ''}`}>
-              <span class="plan__badge">{plan.badge}</span>
-              <p class="plan__price">Sob consulta</p>
-              <h3 class="plan__title">
-                <PlanIcon plan={plan.name} />
-                {plan.name}
-              </h3>
-              <p class="plan__description">{plan.description}</p>
-              <ul>
-                {plan.items.map((item) => <li>{item}</li>)}
-              </ul>
-              <a
-                class="btn btn-primary"
-                href={`https://wa.me/5511937746793?text=${encodeURIComponent(`Olá! Quero solicitar proposta do plano ${plan.name}.`)}`}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Solicitar proposta
-              </a>
-            </article>
-          ))}
-        </div>
-
-        <div class="grid-2">
-          <div class="plan-quiz-intro">
-            <h3>Não sabe qual plano faz sentido?</h3>
-            <p>
-              Responda algumas perguntas rápidas e a gente indica um caminho, sem custo e sem compromisso.
-            </p>
-            <p class="plan-quiz-note">
-              <strong>Importante:</strong> os serviços podem ser personalizados conforme a necessidade e o porte da sua empresa.
-            </p>
-          </div>
-          <PlanQuiz client:visible />
-        </div>
-      </div>
-    </section>
-
-    <section class="section section-alt" id="depoimentos">
-      <div class="container">
-        <p class="eyebrow">Depoimentos</p>
-        <h2 class="section-title">O que nossos clientes dizem</h2>
-        <p class="section-lead">
-          Histórias reais de transformação e crescimento com a Styllu's Assessoria Contábil.
-        </p>
-        <Testimonials client:visible />
-      </div>
-    </section>
-
-    <section class="section" id="equipe">
-      <div class="container">
-        <p class="eyebrow">Quem cuida do seu negócio</p>
-        <h2 class="section-title">Pessoas reais. Relações reais.</h2>
-        <p class="section-lead">
-          Na Styllu's, cliente não fala com um número de protocolo. Fala com gente que conhece o nome da empresa, o histórico e o momento dela.
-        </p>
-        <div class="grid-3">
-          {team.map((person) => (
-            <article class="team-card">
-              <div class="team-avatar">{person.initials}</div>
-              <h3>{person.name}</h3>
-              <p class="role">{person.role}</p>
-              <p>{person.bio}</p>
-            </article>
-          ))}
-        </div>
-        <p class="section-note">
-          E ainda há um time inteiro de analistas, assistentes e gestores por trás de cada entrega, todos com o mesmo compromisso: cuidar do seu negócio como se fosse o nosso.
-        </p>
-      </div>
-    </section>
-
     <section class="section section-alt" id="sobre">
       <div class="container about-block">
         <div class="about-copy">
@@ -378,9 +281,9 @@ const milestones = [
         <div class="history__intro">
           <figure class="history__photo">
             <img
-              src={withBase('mauro-roseli-rinaldi.jpg')}
-              alt="Mauro e Roseli Rinaldi, fundadores da Styllu's"
-              width="599"
+              src={withBase('mauro-roseli-rinaldi-35-anos.jpg')}
+              alt="Mauro e Roseli Rinaldi, fundadores da Styllu's, na comemoração de 35 anos do escritório"
+              width="803"
               height="1024"
               loading="lazy"
               decoding="async"
@@ -391,7 +294,7 @@ const milestones = [
             <p class="eyebrow">Nossa história</p>
             <h2 class="section-title">Um novo estilo de contabilidade. Desde 1990.</h2>
             <p>
-              Em maio de 1990, três meses depois do Plano Collor, <strong>Mauro e Roseli Rinaldi</strong> abriram a Styllu's num quarto da casa da família, na Avenida Nossa Senhora do Ó. Pouco depois, <strong>Simone</strong> chegou trazendo a primeira máquina de escrever do escritório.
+              Em maio de 1990, quando abrir uma empresa no Brasil parecia a pior das ideias, <strong>Mauro e Roseli Rinaldi</strong> abriram a Styllu's num quarto da casa da família, na Avenida Nossa Senhora do Ó. Pouco depois, <strong>Simone</strong> chegou trazendo a primeira máquina de escrever do escritório.
             </p>
             <p>
               Numa época em que tudo era escritório contábil, a ideia era outra: ser assessoria. Ir até o cliente, entender o negócio, atender de perto. O slogan nasceu junto com o nome e continua explicando tudo: <strong>um novo estilo de contabilidade</strong>.
@@ -407,6 +310,103 @@ const milestones = [
             </li>
           ))}
         </ol>
+      </div>
+    </section>
+
+    <section class="section" id="diferenciais">
+      <div class="container">
+        <p class="eyebrow">Por que a Styllu's</p>
+        <h2 class="section-title">Por que escolher a Styllu's?</h2>
+        <p class="section-lead">Diferenciais que fazem a diferença no crescimento do seu negócio</p>
+        <div class="grid-3">
+          {differentials.map((item) => (
+            <article class="feature-tile">
+              <h3>{item.title}</h3>
+              <p>{item.text}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-alt" id="equipe">
+      <div class="container">
+        <p class="eyebrow">Quem cuida do seu negócio</p>
+        <h2 class="section-title">Pessoas reais. Relações reais.</h2>
+        <p class="section-lead">
+          Na Styllu's, cliente não fala com um número de protocolo. Fala com gente que conhece o nome da empresa, o histórico e o momento dela.
+        </p>
+        <div class="grid-3">
+          {team.map((person) => (
+            <article class="team-card">
+              <div class="team-avatar">{person.initials}</div>
+              <h3>{person.name}</h3>
+              <p class="role">{person.role}</p>
+              <p>{person.bio}</p>
+            </article>
+          ))}
+        </div>
+        <p class="section-note">
+          E ainda há um time inteiro de analistas, assistentes e gestores por trás de cada entrega, todos com o mesmo compromisso: cuidar do seu negócio como se fosse o nosso.
+        </p>
+      </div>
+    </section>
+
+    <section class="section" id="depoimentos">
+      <div class="container">
+        <p class="eyebrow">Depoimentos</p>
+        <h2 class="section-title">O que nossos clientes dizem</h2>
+        <p class="section-lead">
+          Histórias reais de transformação e crescimento com a Styllu's Assessoria Contábil.
+        </p>
+        <Testimonials client:visible />
+      </div>
+    </section>
+
+    <section class="section section-alt" id="planos">
+      <div class="container">
+        <p class="eyebrow">Planos</p>
+        <h2 class="section-title">Uma assessoria que acompanha o momento da sua empresa</h2>
+        <p class="section-lead">
+          Do essencial à estrutura mais completa. Se não souber qual escolher, a gente descobre junto com você.
+        </p>
+        <div class="grid-4 plans-grid">
+          {plans.map((plan) => (
+            <article class={`plan plan--${plan.name.toLowerCase()} ${plan.featured ? 'plan--featured' : ''}`}>
+              <span class="plan__badge">{plan.badge}</span>
+              <p class="plan__price">Sob consulta</p>
+              <h3 class="plan__title">
+                <PlanIcon plan={plan.name} />
+                {plan.name}
+              </h3>
+              <p class="plan__description">{plan.description}</p>
+              <ul>
+                {plan.items.map((item) => <li>{item}</li>)}
+              </ul>
+              <a
+                class="btn btn-primary"
+                href={`https://wa.me/5511937746793?text=${encodeURIComponent(`Olá! Quero solicitar proposta do plano ${plan.name}.`)}`}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Solicitar proposta
+              </a>
+            </article>
+          ))}
+        </div>
+
+        <div class="grid-2">
+          <div class="plan-quiz-intro">
+            <h3>Não sabe qual plano faz sentido?</h3>
+            <p>
+              Responda algumas perguntas rápidas e a gente indica um caminho, sem custo e sem compromisso.
+            </p>
+            <p class="plan-quiz-note">
+              <strong>Importante:</strong> os serviços podem ser personalizados conforme a necessidade e o porte da sua empresa.
+            </p>
+          </div>
+          <PlanQuiz client:visible />
+        </div>
       </div>
     </section>
 

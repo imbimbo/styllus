@@ -3,9 +3,9 @@ import { withBase } from '../../lib/base';
 
 const links = [
   { href: withBase('#como-ajudamos'), label: 'Como ajudamos' },
-  { href: withBase('#planos'), label: 'Planos' },
   { href: withBase('#sobre'), label: 'Sobre' },
   { href: withBase('#depoimentos'), label: 'Depoimentos' },
+  { href: withBase('#planos'), label: 'Planos' },
   { href: withBase('blog'), label: 'Blog' },
   { href: withBase('#contato'), label: 'Contato' },
 ];
