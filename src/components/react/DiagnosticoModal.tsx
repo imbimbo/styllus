@@ -1,7 +1,7 @@
 import { useEffect, useId, useMemo, useState } from 'react';
 import { createPortal } from 'react-dom';
 
-const WA_NUMBER = '5511998547114';
+const WA_NUMBER = '5511925188621';
 
 type Momento = 'abrir' | 'tenho' | 'trocar';
 
