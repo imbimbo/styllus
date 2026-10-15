@@ -15,17 +15,14 @@ export default function HeroActions() {
   return (
     <>
       <div className="hero__actions">
-        <button type="button" className="btn btn-primary" onClick={() => start('abrir')}>
-          Quero abrir minha empresa
-        </button>
-        <button type="button" className="btn btn-secondary" onClick={() => start('tenho')}>
-          Já tenho uma empresa
-        </button>
-        <button type="button" className="btn btn-ghost" onClick={() => start('trocar')}>
-          Quero trocar de contador →
+        <button type="button" className="btn btn-primary" onClick={() => start('tenho')}>
+          Falar com especialista
         </button>
       </div>
-      <p className="hero__cta-note">Abertura 100% guiada. Sem custo. Retorno em até 24h.</p>
+      <p className="hero__cta-note">
+        Algumas perguntas rápidas e um especialista volta com o melhor caminho.{' '}
+        <a href="#comece">Comece por aqui!</a>
+      </p>
 
       <DiagnosticoModal open={open} onClose={() => setOpen(false)} initialMomento={momento} />
     </>

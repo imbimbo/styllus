@@ -1,49 +1,61 @@
 import { useMemo, useState } from 'react';
+import DiagnosticoModal from './DiagnosticoModal';
 
-const intents = [
+type Momento = 'abrir' | 'tenho' | 'trocar';
+
+const intents: { id: string; title: string; description: string; momento?: Momento }[] = [
   {
-    id: 'abrir',
-    title: 'Quero abrir minha empresa',
-    description: 'Do CNPJ ao primeiro imposto, com alguém explicando cada passo.',
-    message: 'Olá! Quero abrir minha empresa e gostaria de orientação da Styllu\'s.',
-  },
-  {
-    id: 'trocar',
-    title: 'Quero trocar de contador',
-    description: 'A transição é mais simples do que parece. Cuidamos dela por você.',
-    message: 'Olá! Quero trocar de contador e entender como a Styllu\'s pode ajudar na transição.',
-  },
-  {
-    id: 'financeiro',
-    title: 'Quero organizar o financeiro',
-    description: 'Contas em ordem, fluxo de caixa claro e menos surpresa no fim do mês.',
-    message: 'Olá! Quero organizar o financeiro da minha empresa com a Styllu\'s.',
+    id: 'crescendo',
+    title: 'Minha empresa está crescendo',
+    description: 'Simples ou Lucro Presumido, com equipe e mais decisão todo mês.',
+    momento: 'tenho',
   },
   {
     id: 'impostos',
     title: 'Quero entender meus impostos',
     description: 'Saber quanto paga, por que paga e o que pode ser feito legalmente.',
-    message: 'Olá! Quero entender melhor meus impostos e oportunidades tributárias.',
+    momento: 'tenho',
   },
   {
-    id: 'crescendo',
-    title: 'Minha empresa está crescendo',
-    description: 'Mais equipe, mais números, mais decisões, com acompanhamento próximo.',
-    message: 'Olá! Minha empresa está crescendo e preciso de assessoria mais completa.',
+    id: 'financeiro',
+    title: 'Quero organizar o financeiro',
+    description: 'Contas em ordem, fluxo de caixa claro e menos surpresa no fim do mês.',
+    momento: 'tenho',
+  },
+  {
+    id: 'trocar',
+    title: 'Quero trocar de contador',
+    description: 'A transição é mais simples do que parece. Cuidamos dela por você.',
+    momento: 'trocar',
+  },
+  {
+    id: 'abrir',
+    title: 'Quero abrir minha empresa',
+    description: 'Abertura guiada, com desconto de fidelidade para quem continua.',
+    momento: 'abrir',
   },
   {
     id: 'falar',
     title: 'Só quero falar com alguém',
-    description: 'Sem formulário longo: conte sua dúvida e a gente te orienta.',
-    message: 'Olá! Gostaria de falar com um especialista da Styllu\'s.',
+    description: 'Fale diretamente com um especialista!',
   },
 ];
 
-const WA = 'https://wa.me/5511925188621';
+const WA_FALAR = `https://wa.me/5511925188621?text=${encodeURIComponent("Olá! Quero falar com um especialista da Styllu's.")}`;
 
 export default function IntentPicker() {
   const [selected, setSelected] = useState<string | null>(null);
+  const [formOpen, setFormOpen] = useState(false);
   const current = useMemo(() => intents.find((i) => i.id === selected), [selected]);
+
+  function choose(id: string) {
+    setSelected(id);
+    if (id === 'falar') {
+      window.open(WA_FALAR, '_blank', 'noopener,noreferrer');
+      return;
+    }
+    setFormOpen(true);
+  }
 
   return (
     <div>
@@ -54,7 +66,7 @@ export default function IntentPicker() {
             type="button"
             className="intent-card"
             aria-pressed={selected === intent.id}
-            onClick={() => setSelected(intent.id)}
+            onClick={() => choose(intent.id)}
           >
             <strong>{intent.title}</strong>
             <span>{intent.description}</span>
@@ -62,21 +74,11 @@ export default function IntentPicker() {
         ))}
       </div>
 
-      {current && (
-        <div className="intent-actions">
-          <a
-            className="btn btn-primary"
-            href={`${WA}?text=${encodeURIComponent(current.message)}`}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Continuar no WhatsApp
-          </a>
-          <a className="btn btn-outline" href="#contato">
-            Prefiro o formulário
-          </a>
-        </div>
-      )}
+      <DiagnosticoModal
+        open={formOpen}
+        onClose={() => setFormOpen(false)}
+        initialMomento={current?.momento}
+      />
     </div>
   );
 }

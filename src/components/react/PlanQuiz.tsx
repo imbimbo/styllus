@@ -37,27 +37,27 @@ const questions = [
 ];
 
 function recommend(answers: Answers) {
-  if (answers.need === 'finance' || answers.team === 'many') {
+  if (answers.need === 'finance') {
     return {
       plan: 'Premium',
-      reason: 'Com operação financeira e mais complexidade, o Premium cobre BPO e consultoria estratégica.',
+      reason: 'O Premium é o Ouro mais o BPO: a Styllu\'s assume a rotina financeira.',
     };
   }
-  if (answers.need === 'reports' || answers.team === 'few') {
+  if (answers.need === 'reports') {
     return {
       plan: 'Ouro',
-      reason: 'Para visão gerencial e acompanhamento consultivo mensal, o Ouro costuma ser o caminho.',
+      reason: 'O Ouro junta o tributário, a folha e a contabilidade que mostra o resultado do mês.',
     };
   }
-  if (answers.team === 'few' || answers.stage === 'switching') {
+  if (answers.team === 'few' || answers.team === 'many') {
     return {
       plan: 'Prata',
-      reason: 'Com folha e rotinas trabalhistas, o Prata traz tranquilidade para crescer.',
+      reason: 'Com funcionários, o Prata cobre o tributário do Bronze e o departamento pessoal.',
     };
   }
   return {
     plan: 'Bronze',
-    reason: 'Para começar com a base fiscal organizada, o Bronze é um ótimo ponto de partida.',
+    reason: 'O Bronze é o tributário, com analista dedicado, a partir de R$ 250.',
   };
 }
 
@@ -88,7 +88,7 @@ export default function PlanQuiz() {
 
   if (done) {
     const result = recommend(answers);
-    const message = `Olá! Fiz o quiz de planos e o indicado foi ${result.plan}. Quero solicitar uma proposta.`;
+    const message = `Olá! Fiz o quiz de planos e o indicado foi ${result.plan}. Quero falar com um especialista.`;
     return (
       <div className="quiz-panel">
         <p className="eyebrow">Sugestão</p>
@@ -101,7 +101,7 @@ export default function PlanQuiz() {
             target="_blank"
             rel="noopener noreferrer"
           >
-            Solicitar proposta
+            Falar com especialista
           </a>
           <button type="button" className="btn btn-outline" onClick={reset}>
             Refazer

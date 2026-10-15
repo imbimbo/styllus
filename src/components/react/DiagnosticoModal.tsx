@@ -117,7 +117,7 @@ const FLOWS: Record<Momento, Step[]> = {
         { value: 'Folha e equipe', label: 'Folha, CLT e equipe' },
         { value: 'Relatórios', label: 'Números claros para decidir' },
         { value: 'Financeiro', label: 'Organizar o financeiro' },
-        { value: 'Não sei ainda', label: 'Quero um diagnóstico geral' },
+        { value: 'Não sei ainda', label: 'Quero uma orientação geral' },
       ],
     },
     {
@@ -196,7 +196,7 @@ function suggestPlan(answers: Answers) {
 
 function buildWhatsAppUrl(answers: Answers, plan: string) {
   const lines = [
-    "Olá! Fiz o diagnóstico no site da Styllu's.",
+    "Olá! Quero falar com um especialista. Seguem as respostas do site.",
     '',
     `Nome: ${answers.nome ?? '-'}`,
     `WhatsApp: ${answers.whatsapp ?? '-'}`,
@@ -325,7 +325,7 @@ export default function DiagnosticoModal({ open, onClose, initialMomento }: Prop
         ) : (
           <div className="diag-body">
             <div className="diag-progress">
-              <span className="diag-progress__label">Diagnóstico gratuito</span>
+              <span className="diag-progress__label">Falar com especialista</span>
               <span>
                 Etapa {progressIndex} de {totalSteps}
               </span>
@@ -353,8 +353,8 @@ export default function DiagnosticoModal({ open, onClose, initialMomento }: Prop
               </div>
             ) : isContactStep ? (
               <div className="diag-contact">
-                <h2 id={titleId}>Para onde levamos o seu diagnóstico?</h2>
-                <p>Sem custo e sem compromisso. Retorno em até 24h úteis.</p>
+                <h2 id={titleId}>Para quem o especialista deve ligar?</h2>
+                <p>Ele chega na conversa com o que você contou aqui.</p>
 
                 <div className="form-field">
                   <label htmlFor="diag-nome">Seu nome</label>
@@ -384,10 +384,10 @@ export default function DiagnosticoModal({ open, onClose, initialMomento }: Prop
                   disabled={!canSubmit}
                   onClick={finish}
                 >
-                  Ver meu diagnóstico →
+                  Falar com especialista
                 </button>
                 <p className="diag-footnote">
-                  Usamos seus dados apenas para entrar em contato sobre este diagnóstico.
+                  Usamos seus dados apenas para marcar essa conversa.
                 </p>
               </div>
             ) : current ? (

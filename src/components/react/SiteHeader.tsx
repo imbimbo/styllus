@@ -14,61 +14,65 @@ export default function SiteHeader() {
   const [open, setOpen] = useState(false);
 
   return (
-    <header className="site-header">
-      <div className="site-header__shell">
-        <div className="nav-pill">
-          <a className="nav-pill__brand" href={withBase('')}>
-            Styllu&apos;s
+    <>
+      <div className="topbar">
+        <div className="container topbar__inner">
+          <span className="topbar__since">Desde 1990 na Freguesia do Ó, São Paulo</span>
+          <div className="topbar__contacts">
+            <a href="tel:+551139333939">(11) 3933-3939</a>
+            <a href="https://wa.me/5511925188621" target="_blank" rel="noopener noreferrer">
+              WhatsApp
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <header className="site-header">
+        <div className="container site-header__bar">
+          <a className="site-header__brand" href={withBase('')}>
+            <img src={withBase('styllu-logo.png')} alt="" width="36" height="36" />
+            <span>
+              <span className="site-header__name">Styllu&apos;s</span>
+              <span className="site-header__tagline">Assessoria Contábil</span>
+            </span>
           </a>
 
-          <nav className="nav-pill__links" aria-label="Principal">
+          <nav className="site-header__links" aria-label="Principal">
             {links.map((link) => (
-              <a key={link.href} href={link.href} className="nav-pill__link">
+              <a key={link.href} href={link.href} className="site-header__link">
                 {link.label}
               </a>
             ))}
           </nav>
 
-          <a className="nav-pill__cta shadow-animate" href={withBase('#contato')}>
+          <a className="btn btn-primary site-header__cta" href={withBase('#contato')}>
             Falar com especialista
           </a>
 
           <button
             type="button"
-            className="nav-pill__menu"
+            className="site-header__menu"
             aria-expanded={open}
             aria-controls="mobile-menu"
-            aria-label={open ? 'Fechar menu' : 'Abrir menu'}
             onClick={() => setOpen((v) => !v)}
           >
-            {open ? (
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                <path d="M18 6 6 18" />
-                <path d="m6 6 12 12" />
-              </svg>
-            ) : (
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                <line x1="4" x2="20" y1="12" y2="12" />
-                <line x1="4" x2="20" y1="6" y2="6" />
-                <line x1="4" x2="20" y1="18" y2="18" />
-              </svg>
-            )}
+            {open ? 'Fechar' : 'Menu'}
           </button>
         </div>
 
         {open && (
-          <div className="nav-pill__drawer" id="mobile-menu">
+          <div className="container site-header__drawer" id="mobile-menu">
             {links.map((link) => (
               <a key={link.href} href={link.href} onClick={() => setOpen(false)}>
                 {link.label}
               </a>
             ))}
-            <a className="btn btn-primary shadow-animate" href={withBase('#contato')} onClick={() => setOpen(false)}>
+            <a className="btn btn-primary" href={withBase('#contato')} onClick={() => setOpen(false)}>
               Falar com especialista
             </a>
           </div>
         )}
-      </div>
-    </header>
+      </header>
+    </>
   );
 }
