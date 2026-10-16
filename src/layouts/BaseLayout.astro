@@ -1,16 +1,75 @@
 ---
 import '../styles/global.css';
 import { withBase } from '../lib/base';
+import googleReviews from '../data/google-reviews.json';
 
 interface Props {
   title?: string;
   description?: string;
+  image?: string;
+  type?: 'website' | 'article';
 }
 
 const {
-  title = "Styllu's Assessoria Contábil | Pague o que é devido, nem um real além disso.",
-  description = 'Assessoria para PME no Simples ou no Lucro Presumido. Analista dedicado a partir de R$ 250. Tributário, folha, contábil e BPO. 35 anos e nota 4,9 no Google.',
+  title = "Assessoria Contábil para PME | Freguesia do Ó, SP | Styllu's",
+  description = 'Contabilidade na Freguesia do Ó (SP) desde 1990. Tributário, folha, contábil e BPO para PME, analista dedicado a partir de R$ 250. Atendemos todo o Brasil.',
+  image,
+  type = 'website',
 } = Astro.props;
+
+const site = Astro.site ?? new URL('https://www.stylluscontabil.com.br');
+const canonical = new URL(Astro.url.pathname, site).href;
+const homeUrl = new URL(withBase(''), site).href;
+const ogImage = image ?? new URL(withBase('og-image.jpg'), site).href;
+const logoUrl = new URL(withBase('styllu-logo.png'), site).href;
+
+const business = {
+  '@context': 'https://schema.org',
+  '@type': 'AccountingService',
+  '@id': `${homeUrl}#empresa`,
+  name: "Styllu's Assessoria Contábil",
+  alternateName: 'Styllus Contábil',
+  slogan: 'Um novo estilo de contabilidade',
+  description,
+  url: homeUrl,
+  logo: logoUrl,
+  image: ogImage,
+  telephone: '+55-11-3933-3939',
+  email: 'contato@stylluscontabil.com.br',
+  foundingDate: '1990-05',
+  priceRange: 'A partir de R$ 250/mês',
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: 'Rua da Bica, 55',
+    addressLocality: 'São Paulo',
+    addressRegion: 'SP',
+    postalCode: '02925-000',
+    addressCountry: 'BR',
+  },
+  areaServed: [
+    { '@type': 'Place', name: 'Freguesia do Ó, São Paulo' },
+    { '@type': 'City', name: 'São Paulo' },
+    { '@type': 'Country', name: 'Brasil' },
+  ],
+  contactPoint: [
+    {
+      '@type': 'ContactPoint',
+      contactType: 'sales',
+      telephone: '+55-11-92518-8621',
+      areaServed: 'BR',
+      availableLanguage: 'Portuguese',
+    },
+    {
+      '@type': 'ContactPoint',
+      contactType: 'customer service',
+      telephone: '+55-11-91015-5687',
+      areaServed: 'BR',
+      availableLanguage: 'Portuguese',
+    },
+  ],
+  hasMap: googleReviews.mapsUrl,
+  sameAs: ['https://www.linkedin.com/company/styllu-s-assessoria-cont%C3%A1bil'],
+};
 ---
 
 <!doctype html>
@@ -18,18 +77,35 @@ const {
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
     <meta name="description" content={description} />
-    <meta
-      name="keywords"
-      content="assessoria contábil, contabilidade, tributário, trabalhista, BPO financeiro, planejamento tributário"
-    />
+    <link rel="canonical" href={canonical} />
+    <meta name="theme-color" content="#007af5" />
+
+    <meta name="geo.region" content="BR-SP" />
+    <meta name="geo.placename" content="Freguesia do Ó, São Paulo" />
+
+    <meta property="og:type" content={type} />
+    <meta property="og:site_name" content="Styllu's Assessoria Contábil" />
+    <meta property="og:locale" content="pt_BR" />
+    <meta property="og:url" content={canonical} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:type" content="website" />
-    <meta property="og:locale" content="pt_BR" />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Styllu's Assessoria Contábil: pague o que é devido, nem um real além disso." />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+
     <link rel="icon" type="image/svg+xml" href={withBase('favicon.svg')} />
     <link rel="icon" type="image/png" href={withBase('styllu-logo.png')} />
-    <title>{title}</title>
+    <link rel="apple-touch-icon" href={withBase('styllu-logo.png')} />
+
+    <script type="application/ld+json" set:html={JSON.stringify(business)} />
   </head>
   <body>
     <slot />

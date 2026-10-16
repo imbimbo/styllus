@@ -32,6 +32,8 @@ function formatDate(value?: string) {
 <BaseLayout
   title={`${post.title} | Styllu's Blog`}
   description={post.excerpt || `Artigo: ${post.title}`}
+  image={post.mainImage ? urlFor(post.mainImage).width(1200).height(630).url() : undefined}
+  type="article"
 >
   <SiteHeader client:load />
   <main class="post-page">
