@@ -18,17 +18,17 @@ const services = [
     label: 'Assessoria Tributária',
     title: 'Revisão do que a empresa já paga, dentro da lei.',
     bullets: ['Apuração do imposto devido', 'Revisões e oportunidades fiscais', 'Calendário fiscal sem surpresas'],
-    practice: 'Na prática: planejamento tributário, análise de NCM, apuração de impostos e obrigações com compliance total.',
+    practice: 'Na prática: planejamento tributário, análise de NCM, apuração de impostos e obrigações acessórias.',
   },
   {
     label: 'Assessoria Trabalhista',
-    title: 'Sua equipe em dia, sem dor de cabeça com prazos e obrigações.',
+    title: 'Folha, admissões e eSocial no prazo, todo mês.',
     bullets: ['eSocial sem pendências', 'Rotinas claras e prazos cumpridos', 'Orientação preventiva para o RH'],
-    practice: 'Na prática: folha, admissões, demissões e rotinas do DP com foco em segurança jurídica e agilidade.',
+    practice: 'Na prática: folha, admissões, demissões e rotinas do departamento pessoal.',
   },
   {
     label: 'Assessoria Contábil',
-    title: 'Tenha números organizados para decidir com confiança.',
+    title: 'Balanço e relatório que mostram o resultado do mês.',
     bullets: ['Demonstrativos e indicadores-chave', 'Centros de custo e orçamentos', 'Acompanhamento consultivo com analistas experientes'],
     practice: 'Na prática: escrituração, balanços e relatórios gerenciais que viram decisões.',
   },
@@ -36,17 +36,8 @@ const services = [
     label: 'BPO Financeiro',
     title: 'Deixe a rotina financeira com a gente e volte a olhar para o negócio.',
     bullets: ['Rotina financeira organizada', 'DRE gerencial e previsões', 'Painéis e relatórios de controle'],
-    practice: 'Na prática: contas a pagar e receber, conciliações e fluxo de caixa com inteligência e rotina.',
+    practice: 'Na prática: contas a pagar e receber, conciliações e fluxo de caixa.',
   },
-];
-
-const differentials = [
-  { title: 'Analista dedicado', text: 'A partir de R$ 250, alguém que conhece a empresa pelo nome.' },
-  { title: 'Imposto certo', text: 'Pague o que é devido, nem um real além disso.' },
-  { title: 'Folha no mesmo time', text: 'Departamento pessoal e eSocial junto com o tributário.' },
-  { title: 'Número para decidir', text: 'Balanço e relatório que mostram o mês, não só a obrigação.' },
-  { title: 'BPO quando pesa', text: 'A rotina financeira entra quando a operação pede.' },
-  { title: 'Cliente que fica', text: 'O Açougue Guaraci está com a Styllu\'s desde 1990.' },
 ];
 
 const plans = [
@@ -55,7 +46,6 @@ const plans = [
     badge: 'Tributário',
     featured: false,
     price: 'A partir de R$ 250',
-    priceNote: 'com analista dedicado',
     description: 'O tributário em dia. Ponto de partida para a empresa que precisa de imposto certo.',
     items: ['Apuração de impostos', 'Obrigações fiscais', 'Analista dedicado'],
   },
@@ -63,8 +53,7 @@ const plans = [
     name: 'Prata',
     badge: '+ Departamento pessoal',
     featured: false,
-    price: 'Conforme a operação',
-    priceNote: 'Bronze mais a folha',
+    price: 'A partir de R$ 400',
     description: 'O Bronze, mais o departamento pessoal.',
     items: ['Tudo do Bronze', 'Folha de pagamento', 'Admissões e demissões', 'eSocial'],
   },
@@ -72,8 +61,7 @@ const plans = [
     name: 'Ouro',
     badge: 'Para a PME',
     featured: true,
-    price: 'Conforme a operação',
-    priceNote: 'Prata mais o contábil',
+    price: 'A partir de R$ 700',
     description: 'O Prata, mais a contabilidade para decidir todo mês.',
     items: ['Tudo do Prata', 'Balanços e demonstrativos', 'Relatórios gerenciais', 'Acompanhamento consultivo'],
   },
@@ -81,8 +69,7 @@ const plans = [
     name: 'Premium',
     badge: '+ BPO financeiro',
     featured: false,
-    price: 'Conforme a operação',
-    priceNote: 'Ouro mais a rotina financeira',
+    price: 'A partir de R$ 1.100',
     description: 'O Ouro, mais a rotina financeira nas mãos da Styllu\'s.',
     items: ['Tudo do Ouro', 'Contas a pagar e receber', 'Conciliações bancárias', 'Fluxo de caixa'],
   },
@@ -93,15 +80,17 @@ const priceFactors = ['Regime tributário', 'Faturamento', 'Funcionários', 'Fil
 const team = [
   {
     initials: 'EM',
+    photo: 'emerson-morelli.jpg',
     name: 'Emerson Morelli',
     role: 'Diretor e Gerente Tributário',
-    bio: 'Especialista em planejamento fiscal. Conhecido pelos clientes pelo retorno rápido e pela explicação simples.',
+    bio: 'No tributário da Styllu\'s desde 2014. ICMS, substituição tributária, PIS e COFINS: é quem confere se a empresa paga o que deve, nem mais, nem menos. Conhecido pelos clientes pelo retorno rápido e pela explicação simples.',
   },
   {
     initials: 'FR',
+    photo: 'felipe-rinaldi.jpg',
     name: 'Felipe Rinaldi',
     role: 'Diretor Estratégico',
-    bio: 'Atendimento de proximidade. Acompanha cada cliente como se fosse o único, e os depoimentos provam.',
+    bio: 'Segunda geração da família Rinaldi. Começou como auxiliar fiscal, passou pelo tributário e hoje é diretor estratégico. Criou o processo de entrada de novos clientes e defende que contabilidade não é custo, é investimento.',
   },
 ];
 
@@ -141,9 +130,9 @@ const milestones = [
             Pague o que é devido,
             <span>nem um real além disso.</span>
           </h1>
-          <p class="hero__tagline">Assessoria de perto para a empresa que já tem equipe.</p>
+          <p class="hero__tagline">Assessoria de perto, do primeiro CNPJ à empresa com equipe.</p>
           <p class="hero__lead">
-            Tributos, folha e números com um analista que conhece a empresa pelo nome. A partir de R$ 250,00. Quem vai abrir entra num plano com desconto de fidelidade.
+            Tributos, folha e números com um analista que conhece a empresa pelo nome. A partir de R$ 250,00. Para quem abre a empresa e fecha contrato, o primeiro honorário sai grátis.
           </p>
           <HeroActions client:load />
           <div class="hero__stats">
@@ -180,42 +169,7 @@ const milestones = [
       </div>
     </section>
 
-    <section class="section section-alt" id="como-ajudamos">
-      <div class="container">
-        <p class="eyebrow">Como ajudamos</p>
-        <h2 class="section-title">Como a Styllu's entra na sua história</h2>
-        <p class="section-lead">
-          Três caminhos, o mesmo cuidado: entender antes de propor.
-        </p>
-        <div class="grid-3">
-          <article class="feature-tile">
-            <p class="service-label">Já tenho uma empresa</p>
-            <h3>Mais clareza no mês inteiro</h3>
-            <ul>
-              <li>Uma conversa com especialista para ver o que pede atenção</li>
-              <li>Tributos, folha e contábil no ritmo da operação</li>
-              <li>Relatórios que mostram o resultado, não só a obrigação</li>
-              <li>Analista dedicado que conhece a empresa pelo nome</li>
-            </ul>
-            <a class="btn btn-ghost" href="https://wa.me/5511925188621?text=Ol%C3%A1!%20J%C3%A1%20tenho%20uma%20empresa%20e%20quero%20falar%20com%20um%20especialista." target="_blank" rel="noopener noreferrer">Falar com especialista →</a>
-          </article>
-          <article class="feature-tile">
-            <p class="service-label">Quero trocar de contador</p>
-            <h3>A troca sem perder prazo</h3>
-            <p>A Styllu's organiza a transição para a empresa não parar no meio do mês.</p>
-            <a class="btn btn-ghost" href="https://wa.me/5511925188621?text=Ol%C3%A1!%20Quero%20trocar%20de%20contador%20e%20falar%20com%20um%20especialista." target="_blank" rel="noopener noreferrer">Falar com especialista →</a>
-          </article>
-          <article class="feature-tile">
-            <p class="service-label">Vou abrir minha empresa</p>
-            <h3>Abertura com desconto de fidelidade</h3>
-            <p>Do CNPJ às primeiras obrigações. Quem continua na Styllu's entra num plano com desconto de fidelidade.</p>
-            <a class="btn btn-ghost" href="https://wa.me/5511925188621?text=Ol%C3%A1!%20Vou%20abrir%20minha%20empresa%20e%20quero%20saber%20do%20plano%20com%20desconto%20de%20fidelidade." target="_blank" rel="noopener noreferrer">Quero abrir com vocês →</a>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section class="section" id="servicos">
+    <section class="section section-alt" id="servicos">
       <div class="container">
         <p class="eyebrow">Assessorias</p>
         <h2 class="section-title">O que você ganha com as nossas assessorias</h2>
@@ -238,7 +192,7 @@ const milestones = [
       </div>
     </section>
 
-    <section class="section section-alt" id="sobre">
+    <section class="section" id="sobre">
       <div class="container about-block">
         <div class="about-copy">
           <p class="eyebrow">Sobre</p>
@@ -247,13 +201,10 @@ const milestones = [
             São <strong>35 anos</strong> de história construída cliente a cliente, conversa por conversa. Começamos como um pequeno escritório de contabilidade em São Paulo e crescemos com uma convicção simples: o cliente não precisa entender de tributo, precisa de alguém de confiança para cuidar disso por ele.
           </p>
           <p>
-            Hoje somos um time de analistas, gestores e parceiros, diretores como o <strong>Emerson</strong>, o <strong>Felipe Rinaldi</strong> e muitos outros líderes e colaboradores, que os clientes chamam pelo nome porque a relação é assim: próxima, atenta, presente no mês inteiro, não só no fechamento.
-          </p>
-          <p>
-            Cuidamos da parte chata para que o empreendedor possa cuidar do que ama. É isso que move a Styllu's desde o primeiro dia.
+            Hoje somos um time de analistas, gestores e parceiros, diretores como o <strong>Emerson Morelli</strong>, o <strong>Felipe Rinaldi</strong> e muitos outros líderes e colaboradores, que os clientes chamam pelo nome porque a relação é assim: próxima, atenta, presente no mês inteiro, não só no fechamento.
           </p>
           <blockquote class="about-quote">
-            “Pague o que é devido, nem um real além disso.”
+            “Numa época em que tudo era escritório, a ideia era ser assessoria.”
           </blockquote>
           <a class="btn btn-primary" href="https://wa.me/5511925188621?text=Ol%C3%A1!%20Quero%20falar%20com%20um%20especialista%20sobre%20a%20minha%20empresa." target="_blank" rel="noopener noreferrer">Falar com especialista</a>
         </div>
@@ -317,22 +268,6 @@ const milestones = [
       </div>
     </section>
 
-    <section class="section" id="diferenciais">
-      <div class="container">
-        <p class="eyebrow">Por que a Styllu's</p>
-        <h2 class="section-title">Por que escolher a Styllu's?</h2>
-        <p class="section-lead">O que muda no mês da empresa.</p>
-        <div class="grid-3">
-          {differentials.map((item) => (
-            <article class="feature-tile">
-              <h3>{item.title}</h3>
-              <p>{item.text}</p>
-            </article>
-          ))}
-        </div>
-      </div>
-    </section>
-
     <section class="section section-alt" id="equipe">
       <div class="container">
         <p class="eyebrow">Quem cuida do seu negócio</p>
@@ -343,7 +278,19 @@ const milestones = [
         <div class="grid-2">
           {team.map((person) => (
             <article class="team-card">
-              <div class="team-avatar">{person.initials}</div>
+              {person.photo ? (
+                <img
+                  class="team-avatar team-avatar--photo"
+                  src={withBase(person.photo)}
+                  alt={person.name}
+                  width="64"
+                  height="64"
+                  loading="lazy"
+                  decoding="async"
+                />
+              ) : (
+                <div class="team-avatar">{person.initials}</div>
+              )}
               <h3>{person.name}</h3>
               <p class="role">{person.role}</p>
               <p>{person.bio}</p>
@@ -351,28 +298,17 @@ const milestones = [
           ))}
         </div>
         <p class="section-note">
-          E ainda há um time inteiro de analistas, assistentes e gestores por trás de cada entrega, todos com o mesmo compromisso: cuidar do seu negócio como se fosse o nosso.
+          E ainda há um time inteiro de analistas, assistentes e gestores por trás de cada entrega.
         </p>
       </div>
     </section>
 
-    <section class="section" id="depoimentos">
-      <div class="container">
-        <p class="eyebrow">Depoimentos</p>
-        <h2 class="section-title">O que nossos clientes dizem</h2>
-        <p class="section-lead">
-          Histórias reais de transformação e crescimento com a Styllu's Assessoria Contábil.
-        </p>
-        <Testimonials client:visible />
-      </div>
-    </section>
-
-    <section class="section section-alt" id="planos">
+    <section class="section" id="planos">
       <div class="container">
         <p class="eyebrow">Planos</p>
         <h2 class="section-title">Do tributário ao BPO, no tamanho da operação</h2>
         <p class="section-lead">
-          A partir de R$ 250,00 no Bronze, com analista dedicado. O valor dos planos seguintes muda com a operação.
+          Todos com analista dedicado, a partir de R$ 250,00. O valor final muda com a operação.
         </p>
         <ul class="price-factors" aria-label="O que muda o investimento">
           {priceFactors.map((factor) => <li>{factor}</li>)}
@@ -381,8 +317,8 @@ const milestones = [
           {plans.map((plan) => (
             <article class={`plan plan--${plan.name.toLowerCase()} ${plan.featured ? 'plan--featured' : ''}`}>
               <span class="plan__badge">{plan.badge}</span>
-              <p class:list={['plan__price', plan.name === 'Bronze' && 'plan__price--from']}>{plan.price}</p>
-              <p class="plan__price-note">{plan.priceNote}</p>
+              <p class="plan__price plan__price--from">{plan.price}</p>
+              <p class="plan__price-note">por mês</p>
               <h3 class="plan__title">
                 <PlanIcon plan={plan.name} />
                 {plan.name}
@@ -415,6 +351,17 @@ const milestones = [
           </div>
           <PlanQuiz client:visible />
         </div>
+      </div>
+    </section>
+
+    <section class="section section-alt" id="depoimentos">
+      <div class="container">
+        <p class="eyebrow">Depoimentos</p>
+        <h2 class="section-title">O que nossos clientes dizem</h2>
+        <p class="section-lead">
+          O que os clientes escrevem sobre a Styllu's no Google.
+        </p>
+        <Testimonials client:visible />
       </div>
     </section>
 

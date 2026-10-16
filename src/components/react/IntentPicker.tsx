@@ -31,7 +31,7 @@ const intents: { id: string; title: string; description: string; momento?: Momen
   {
     id: 'abrir',
     title: 'Quero abrir minha empresa',
-    description: 'Abertura guiada, com desconto de fidelidade para quem continua.',
+    description: 'Abertura guiada, com o primeiro honorário grátis ao fechar contrato.',
     momento: 'abrir',
   },
   {

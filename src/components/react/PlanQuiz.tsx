@@ -40,19 +40,19 @@ function recommend(answers: Answers) {
   if (answers.need === 'finance') {
     return {
       plan: 'Premium',
-      reason: 'O Premium é o Ouro mais o BPO: a Styllu\'s assume a rotina financeira.',
+      reason: 'O Premium é o Ouro mais o BPO: a Styllu\'s assume a rotina financeira. A partir de R$ 1.100.',
     };
   }
   if (answers.need === 'reports') {
     return {
       plan: 'Ouro',
-      reason: 'O Ouro junta o tributário, a folha e a contabilidade que mostra o resultado do mês.',
+      reason: 'O Ouro junta o tributário, a folha e a contabilidade que mostra o resultado do mês. A partir de R$ 700.',
     };
   }
   if (answers.team === 'few' || answers.team === 'many') {
     return {
       plan: 'Prata',
-      reason: 'Com funcionários, o Prata cobre o tributário do Bronze e o departamento pessoal.',
+      reason: 'Com funcionários, o Prata cobre o tributário do Bronze e o departamento pessoal. A partir de R$ 400.',
     };
   }
   return {

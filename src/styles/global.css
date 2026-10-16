@@ -1322,8 +1322,8 @@ ul {
 }
 
 .team-avatar {
-  width: 3rem;
-  height: 3rem;
+  width: 4rem;
+  height: 4rem;
   border-radius: 999px;
   display: grid;
   place-items: center;
@@ -1331,6 +1331,11 @@ ul {
   color: #fff;
   font-weight: 700;
   margin-bottom: var(--space-sm);
+}
+
+.team-avatar--photo {
+  object-fit: cover;
+  background: none;
 }
 
 .team-card h3 {
